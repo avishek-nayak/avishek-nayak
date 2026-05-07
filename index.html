@@ -1,0 +1,1991 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Avishek Nayak — Product Designer specializing in retention, conversion, and upsell. Based in Ahmedabad, India." />
+  <title>Avishek Nayak — Product Designer</title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,400..900,0..100,0..1;1,9..144,400..900,0..100,0..1&family=DM+Sans:wght@400;500;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet" />
+
+  <!-- Lucide icons -->
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+
+  <style>
+    /* =========================================================
+       AVISHEK NAYAK · Portfolio Stylesheet
+       ========================================================= */
+
+    /* ---------- Variables ---------- */
+    :root {
+      --cream:        #FBF7EE;
+      --ink:          #1A1A1A;
+      --orange:       #FF5B2E;
+      --butter:       #FFD66B;
+      --sage:         #7CB07A;
+      --blue:         #2D5BFF;
+
+      /* Subtle section tints (each section gets one) */
+      --bg-hero:      #FBF7EE;
+      --bg-clock:     #FCEEE3;  /* peach   */
+      --bg-work:      #F0EAD5;  /* wheat   */
+      --bg-about:     #E8EFE0;  /* sage    */
+      --bg-footer:    #DED4B7;  /* deepest warm cream */
+
+      --font-display: 'Fraunces', 'Times New Roman', serif;
+      --font-body:    'DM Sans', -apple-system, sans-serif;
+      --font-mono:    'JetBrains Mono', 'Courier New', monospace;
+
+      --radius-sm: 12px;
+      --radius-md: 16px;
+      --radius-lg: 24px;
+      --radius-xl: 32px;
+      --radius-full: 9999px;
+
+      --max-w: 1200px;
+      --gutter: 24px;
+    }
+
+    /* ---------- Reset / Base ---------- */
+    *, *::before, *::after { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background: var(--cream);
+      color: var(--ink);
+      font-family: var(--font-body);
+      font-size: 16px;
+      line-height: 1.55;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+    a { color: inherit; text-decoration: none; }
+    img, svg { display: block; max-width: 100%; }
+    h1, h2, h3, p { margin: 0; }
+    em { font-style: italic; }
+
+    .container {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: 0 var(--gutter);
+      width: 100%;
+    }
+
+    /* ---------- Type ---------- */
+    .font-display {
+      font-family: var(--font-display);
+      font-variation-settings: 'SOFT' 80, 'WONK' 1;
+      letter-spacing: -0.02em;
+    }
+    .font-body  { font-family: var(--font-body); }
+    .font-mono  { font-family: var(--font-mono); }
+    .accent-orange { color: var(--orange); }
+
+    .mono-tag {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      color: rgba(26, 26, 26, 0.6);
+    }
+
+    /* ---------- Lucide stroke-width override (extra safety) ---------- */
+    [data-lucide], svg.lucide { stroke-width: 1.5 !important; }
+
+    /* ---------- Animations ---------- */
+    @keyframes spin-slow { to { transform: rotate(360deg); } }
+    @keyframes marquee   { to { transform: translateX(-50%); } }
+    @keyframes blink     { 0%, 50% { opacity: 1; } 51%, 100% { opacity: 0; } }
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes float {
+      0%, 100% { transform: translateY(0) rotate(var(--rot, 0deg)); }
+      50%      { transform: translateY(-8px) rotate(var(--rot, 0deg)); }
+    }
+    @keyframes ping { 75%, 100% { transform: scale(2); opacity: 0; } }
+
+    .spin-slow  { animation: spin-slow 18s linear infinite; }
+    .fade-up    { animation: fadeUp 0.8s ease-out backwards; }
+    .float-1    { animation: float 4s ease-in-out infinite; --rot: -1deg; transform: rotate(-1deg); }
+    .float-2    { animation: float 4s ease-in-out infinite 1s; --rot: 1deg; transform: rotate(1deg); }
+
+    /* ---------- Backgrounds ---------- */
+    .grain {
+      background-image: radial-gradient(circle at 1px 1px, rgba(0,0,0,0.04) 1px, transparent 0);
+      background-size: 18px 18px;
+    }
+
+    /* ---------- Buttons ---------- */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      border: none;
+      cursor: pointer;
+      border-radius: var(--radius-full);
+      font-family: var(--font-body);
+      font-weight: 500;
+      font-size: 16px;
+      padding: 12px 24px;
+      transition: all 0.25s ease;
+      text-decoration: none;
+      white-space: nowrap;
+    }
+    .btn svg { width: 20px; height: 20px; }
+    .btn:hover { gap: 12px; }
+    .btn--dark      { background: var(--ink); color: var(--cream); }
+    .btn--dark:hover { background: var(--orange); }
+    .btn--light     { background: var(--cream); color: var(--ink); }
+    .btn--light:hover { background: var(--butter); }
+    .btn--outline   { background: transparent; color: var(--ink); border: 2px solid var(--ink); }
+    .btn--outline:hover { background: var(--ink); color: var(--cream); }
+    .btn--small     { padding: 8px 16px; font-size: 14px; }
+    .btn--small svg { width: 16px; height: 16px; }
+
+    /* ---------- Section heads ---------- */
+    .section-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+    .section-tag__line { width: 48px; height: 1px; background: var(--ink); }
+    .section-tag__line--orange { background: var(--orange); }
+    .section-tag__line--ink    { background: var(--ink); }
+    .section-tag span {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      color: rgba(26, 26, 26, 0.6);
+    }
+
+    .section-title {
+      font-size: clamp(2.25rem, 6vw, 4.5rem);
+      font-weight: 900;
+      line-height: 0.95;
+      margin-bottom: 16px;
+    }
+    .section-title em { font-weight: 300; }
+
+    .section-sub {
+      font-style: italic;
+      font-size: clamp(1.25rem, 2.5vw, 1.75rem);
+      color: rgba(26, 26, 26, 0.7);
+      max-width: 720px;
+      margin-bottom: 64px;
+    }
+
+    /* ---------- Nav ---------- */
+    .nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 50;
+      padding: 16px 0;
+      background: rgba(251, 247, 238, 0.85);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(26, 26, 26, 0.1);
+    }
+    .nav__inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+    .nav__logo {
+      font-size: 24px;
+      font-weight: 900;
+      letter-spacing: -0.04em;
+    }
+    .nav__links {
+      display: none;
+      gap: 32px;
+      font-size: 14px;
+      font-weight: 500;
+    }
+    .nav__links a:hover { color: var(--orange); }
+    @media (min-width: 768px) { .nav__links { display: flex; } }
+
+    /* ---------- Hero ---------- */
+    .hero {
+      padding: 128px 0 80px;
+      position: relative;
+      background: var(--bg-hero);
+    }
+    .hero__inner { position: relative; }
+
+    .sticker {
+      position: absolute;
+      top: 0;
+      right: 16px;
+      z-index: 2;
+      animation: spin-slow 18s linear infinite;
+      filter: drop-shadow(0 8px 16px rgba(0,0,0,0.15));
+    }
+    @media (min-width: 768px) { .sticker { right: 48px; } }
+
+    .hero__status {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 32px;
+    }
+    .pulse { position: relative; display: inline-flex; width: 10px; height: 10px; }
+    .pulse__ring {
+      position: absolute;
+      inset: 0;
+      border-radius: 50%;
+      background: var(--sage);
+      opacity: 0.75;
+      animation: ping 1.4s cubic-bezier(0, 0, 0.2, 1) infinite;
+    }
+    .pulse__dot {
+      position: relative;
+      width: 10px; height: 10px;
+      border-radius: 50%;
+      background: var(--sage);
+    }
+
+    .hero__title {
+      font-size: clamp(3rem, 11vw, 11rem);
+      font-weight: 900;
+      line-height: 0.85;
+      margin-bottom: 32px;
+    }
+    .hero__title em { font-weight: 300; }
+    .hero__title-last { position: relative; display: inline-block; }
+    .hero__underline { position: absolute; bottom: -8px; left: 0; width: 100%; }
+
+    .hero__intro { display: block; max-width: 720px; margin-top: 64px; }
+    .hero__intro-lead {
+      font-size: clamp(1.25rem, 2.2vw, 1.5rem);
+      line-height: 1.4;
+    }
+    .hero__intro-lead strong { font-weight: 900; }
+    .hero__intro-body {
+      font-size: clamp(1rem, 1.6vw, 1.125rem);
+      line-height: 1.6;
+      color: rgba(26, 26, 26, 0.7);
+    }
+
+    .hero__cta { margin-top: 48px; display: flex; flex-wrap: wrap; gap: 16px; }
+
+    /* ---------- Marquee ---------- */
+    .marquee {
+      background: var(--butter);
+      padding: 16px 0;
+      overflow: hidden;
+    }
+    .marquee__track {
+      display: flex;
+      gap: 32px;
+      white-space: nowrap;
+      animation: marquee 32s linear infinite;
+      font-family: var(--font-display);
+      font-size: clamp(1.75rem, 4vw, 3rem);
+      font-weight: 900;
+      text-transform: uppercase;
+      align-items: center;
+    }
+    .marquee__track .star { width: 24px; height: 24px; flex-shrink: 0; }
+
+    /* ---------- Clock section (now light) ---------- */
+    .clock {
+      padding: 96px 0;
+      background: var(--bg-clock);
+      position: relative;
+    }
+
+    /* ---- New timer (reference structure: single row + colons + thin border) ---- */
+    .timer {
+      position: relative;
+      background: var(--ink);
+      color: var(--cream);
+      border: 1.5px solid rgba(251, 247, 238, 0.25);
+      border-radius: var(--radius-md);
+      padding: 56px 32px;
+      max-width: 1100px;
+      margin: 0 auto;
+      box-shadow: 0 24px 60px -28px rgba(0,0,0,0.4);
+    }
+    .timer__border {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      overflow: visible;
+      z-index: 1;
+    }
+    .timer__row { position: relative; z-index: 2; }
+    .timer__border-trace {
+      fill: none;
+      stroke: var(--orange);
+      stroke-width: 2;
+      stroke-linecap: butt;
+      stroke-dasharray: 60;
+      stroke-dashoffset: 60;
+      animation: traceTimer 60s linear infinite;
+    }
+    @keyframes traceTimer {
+      from { stroke-dashoffset: 60; }
+      to   { stroke-dashoffset: 0; }
+    }
+    @media (max-width: 640px) { .timer { padding: 40px 16px; } }
+
+    .timer__row {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 4px;
+    }
+    .timer__unit {
+      flex: 1;
+      text-align: center;
+      min-width: 0;
+    }
+    .timer__num {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 7vw, 5rem);
+      font-weight: 400;
+      line-height: 1;
+      color: var(--cream);
+      font-variant-numeric: tabular-nums;
+      letter-spacing: -0.02em;
+    }
+    .timer__label {
+      margin-top: 16px;
+      font-family: var(--font-display);
+      font-style: italic;
+      font-size: clamp(0.75rem, 1.4vw, 1.05rem);
+      color: rgba(251, 247, 238, 0.7);
+      font-weight: 400;
+    }
+    .timer__sep {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 7vw, 5rem);
+      font-weight: 300;
+      line-height: 1;
+      color: rgba(251, 247, 238, 0.35);
+      align-self: flex-start;
+      padding-top: 0;
+    }
+    @media (max-width: 640px) {
+      .timer__row {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 24px 12px;
+      }
+      .timer__sep { display: none; }
+    }
+
+    /* "Total days" caption below timer */
+    .clock__caption {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      margin-top: 32px;
+      flex-wrap: wrap;
+    }
+    @media (min-width: 640px) { .clock__caption { flex-direction: row; } }
+    .clock__caption-text {
+      font-family: var(--font-display);
+      font-style: italic;
+      font-size: 1.1rem;
+      color: rgba(26, 26, 26, 0.65);
+    }
+    .clock__caption-text span { color: var(--orange); font-weight: 700; font-style: normal; font-variant-numeric: tabular-nums; }
+
+    /* ---- Experience graph ---- */
+    .career { margin-top: 96px; }
+    .career__head {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 24px;
+      margin-bottom: 32px;
+    }
+    .career__title {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 4.5vw, 3.25rem);
+      font-weight: 900;
+      line-height: 0.95;
+    }
+    .career__title em { font-weight: 300; }
+    .career__intro {
+      max-width: 380px;
+      font-size: 1rem;
+      color: rgba(26, 26, 26, 0.7);
+    }
+    .chart {
+      background: var(--cream);
+      border: 1.5px solid rgba(26, 26, 26, 0.15);
+      border-radius: var(--radius-md);
+      padding: 32px 24px 24px;
+      box-shadow: 0 12px 40px -20px rgba(0,0,0,0.18);
+      margin-bottom: 24px;
+    }
+    .chart__svg-wrap { display: block; }
+    .chart svg { width: 100%; height: auto; display: block; }
+    .chart__hint {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      color: rgba(26, 26, 26, 0.45);
+      margin-top: 16px;
+      text-align: center;
+    }
+
+    /* T-chart dots (interactive) */
+    .tdot { cursor: pointer; }
+    .tdot__hit { fill: transparent; }
+    .tdot__halo {
+      fill: var(--orange);
+      opacity: 0;
+      transition: opacity 0.25s ease;
+    }
+    .tdot__ring {
+      fill: var(--cream);
+      stroke: var(--orange);
+      stroke-width: 3;
+      transition: r 0.25s ease;
+    }
+    .tdot__core { fill: var(--orange); transition: r 0.25s ease; }
+    .tdot:hover .tdot__ring { r: 14; }
+    .tdot.is-active .tdot__ring { r: 15; }
+    .tdot.is-active .tdot__core { r: 5; }
+    .tdot.is-active .tdot__halo { opacity: 0.18; }
+
+    /* T-chart text labels */
+    .tlabel-role {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 700;
+      fill: var(--ink);
+      letter-spacing: 0.12em;
+      pointer-events: none;
+    }
+    .tlabel-company {
+      font-family: var(--font-display);
+      font-size: 14px;
+      font-weight: 700;
+      fill: var(--ink);
+      pointer-events: none;
+    }
+    .tlabel-axis {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      fill: rgba(26, 26, 26, 0.4);
+      letter-spacing: 0.2em;
+      pointer-events: none;
+    }
+
+    /* Mobile alternative: stacked list */
+    .tlist {
+      display: none;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .tlist__item {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 14px 16px;
+      border: 1px solid rgba(26, 26, 26, 0.1);
+      border-radius: var(--radius-sm);
+      background: var(--cream);
+      cursor: pointer;
+      transition: all 0.2s ease;
+      text-align: left;
+      font-family: inherit;
+      width: 100%;
+    }
+    .tlist__item:hover, .tlist__item.is-active {
+      border-color: var(--orange);
+      transform: translateX(4px);
+    }
+    .tlist__marker {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: var(--cream);
+      border: 2px solid var(--orange);
+      flex-shrink: 0;
+      transition: all 0.2s ease;
+    }
+    .tlist__item.is-active .tlist__marker {
+      background: var(--orange);
+      box-shadow: 0 0 0 4px rgba(255, 91, 46, 0.18);
+    }
+    .tlist__item--horizontal .tlist__marker {
+      border-style: dashed;
+    }
+    .tlist__role {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      color: rgba(26, 26, 26, 0.6);
+      margin-bottom: 2px;
+    }
+    .tlist__company {
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 1rem;
+    }
+    @media (max-width: 767px) {
+      .chart__svg-wrap { display: none; }
+      .tlist { display: flex; }
+    }
+
+    /* Description card (below the T) */
+    .tcard {
+      background: var(--ink);
+      color: var(--cream);
+      border-radius: var(--radius-md);
+      padding: 40px;
+      position: relative;
+      min-height: 240px;
+      box-shadow: 0 12px 40px -20px rgba(0,0,0,0.3);
+      overflow: hidden;
+    }
+    .tcard__inner {
+      transition: opacity 0.22s ease, transform 0.22s ease;
+    }
+    .tcard.is-swapping .tcard__inner {
+      opacity: 0;
+      transform: translateY(8px);
+    }
+    .tcard__index {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.2em;
+      color: rgba(251, 247, 238, 0.5);
+      margin-bottom: 16px;
+    }
+    .tcard__role {
+      font-family: var(--font-display);
+      font-style: italic;
+      font-size: 1.25rem;
+      color: var(--orange);
+      margin-bottom: 8px;
+      font-weight: 400;
+    }
+    .tcard__company {
+      font-family: var(--font-display);
+      font-size: clamp(1.75rem, 3.5vw, 2.5rem);
+      font-weight: 900;
+      margin-bottom: 24px;
+      letter-spacing: -0.02em;
+      line-height: 1.05;
+    }
+    .tcard__desc {
+      font-size: clamp(0.95rem, 1.4vw, 1.05rem);
+      line-height: 1.7;
+      color: rgba(251, 247, 238, 0.85);
+    }
+
+    /* Side-by-side graph + description card on desktop */
+    .tlayout {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 24px;
+      align-items: stretch;
+    }
+    .career__head--stacked { display: block; margin-bottom: 24px; }
+    .career__head--stacked .section-tag { margin-bottom: 16px; }
+    @media (min-width: 1024px) {
+      .tlayout { grid-template-columns: 1.4fr 1fr; gap: 32px; }
+      .tlayout > .chart { margin-bottom: 0; }
+      .tlayout__left { display: flex; flex-direction: column; }
+      .tlayout__left > .chart { flex: 1; }
+    }
+
+    /* ---------- Hero social buttons ---------- */
+    .hero__socials {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+    .hero__social-btn {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(26, 26, 26, 0.06);
+      color: var(--ink);
+      transition: all 0.2s ease;
+    }
+    .hero__social-btn:hover {
+      background: var(--ink);
+      color: var(--cream);
+      transform: translateY(-2px);
+    }
+    .hero__social-btn svg { width: 18px; height: 18px; }
+
+    /* ---------- Skills strip ---------- */
+    .skills-strip {
+      background: var(--bg-hero);
+      padding: 64px 0 80px;
+      border-top: 1px solid rgba(26,26,26,0.08);
+    }
+    .skills-strip__grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 48px;
+    }
+    @media (min-width: 768px) {
+      .skills-strip__grid { grid-template-columns: repeat(3, 1fr); gap: 64px; }
+    }
+    .skills-col__head {
+      display: flex;
+      align-items: baseline;
+      gap: 12px;
+      margin-bottom: 20px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid rgba(26,26,26,0.15);
+    }
+    .skills-col__num {
+      font-size: 12px;
+      letter-spacing: 0.2em;
+      color: rgba(26,26,26,0.45);
+    }
+    .skills-col__title {
+      font-size: clamp(1.5rem, 2.4vw, 1.875rem);
+      font-weight: 900;
+      letter-spacing: -0.02em;
+    }
+    .skills-col__list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .skills-col__list li {
+      font-family: var(--font-display);
+      font-size: 1.05rem;
+      color: rgba(26,26,26,0.78);
+      padding-left: 18px;
+      position: relative;
+    }
+    .skills-col__list li::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0.65em;
+      width: 8px;
+      height: 1px;
+      background: var(--orange);
+    }
+
+    /* ---------- Articles (Twitter-snapshot bento) ---------- */
+    .articles {
+      padding: 96px 0;
+      background: var(--bg-hero);
+    }
+    .articles__head {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 32px;
+      margin-bottom: 48px;
+    }
+    .articles__blurb {
+      max-width: 420px;
+      font-size: 16px;
+      color: rgba(26, 26, 26, 0.7);
+    }
+    .bento {
+      display: flex;
+      gap: 16px;
+      overflow-x: auto;
+      overflow-y: visible;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+      padding: 12px 4px 32px;
+      margin: 0 -4px;
+      scrollbar-width: thin;
+      scrollbar-color: rgba(26,26,26,0.2) transparent;
+    }
+    .bento::-webkit-scrollbar { height: 8px; }
+    .bento::-webkit-scrollbar-track { background: transparent; }
+    .bento::-webkit-scrollbar-thumb { background: rgba(26,26,26,0.2); border-radius: 999px; }
+
+    .tweet {
+      background: var(--cream);
+      border: 1px solid rgba(26,26,26,0.12);
+      border-radius: var(--radius-md);
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      text-decoration: none;
+      color: var(--ink);
+      transition: all 0.25s ease;
+      flex: 0 0 320px;
+      width: 320px;
+      min-height: 280px;
+      scroll-snap-align: start;
+    }
+    @media (min-width: 768px) { .tweet { flex: 0 0 360px; width: 360px; } }
+    .tweet:hover {
+      transform: translateY(-3px);
+      border-color: var(--ink);
+      box-shadow: 0 12px 32px -16px rgba(0,0,0,0.18);
+    }
+    .tweet__head {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .tweet__avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--orange), var(--butter));
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--ink);
+      font-family: var(--font-display);
+      font-weight: 900;
+      font-size: 18px;
+    }
+    .tweet__meta { line-height: 1.2; min-width: 0; }
+    .tweet__name {
+      font-weight: 700;
+      font-size: 14px;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .tweet__verified {
+      width: 14px;
+      height: 14px;
+      color: var(--orange);
+    }
+    .tweet__handle {
+      font-size: 13px;
+      color: rgba(26,26,26,0.55);
+    }
+    .tweet__body {
+      font-size: clamp(0.95rem, 1.4vw, 1.05rem);
+      line-height: 1.45;
+      color: var(--ink);
+      flex: 1;
+    }
+    .tweet__body strong { color: var(--orange); font-weight: 600; }
+    .tweet__footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-top: 8px;
+      border-top: 1px solid rgba(26,26,26,0.08);
+      font-size: 12px;
+      color: rgba(26,26,26,0.5);
+    }
+    .tweet__actions {
+      display: flex;
+      gap: 14px;
+      align-items: center;
+    }
+    .tweet__actions span {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-family: var(--font-mono);
+    }
+    .tweet__actions svg { width: 13px; height: 13px; }
+    .tweet__date { font-family: var(--font-mono); }
+    .tweet--feature {
+      background: var(--ink);
+      color: var(--cream);
+      border-color: var(--ink);
+    }
+    .tweet--feature .tweet__handle,
+    .tweet--feature .tweet__footer,
+    .tweet--feature .tweet__date,
+    .tweet--feature .tweet__actions span { color: rgba(251,247,238,0.6); }
+    .tweet--feature .tweet__body { color: var(--cream); font-size: clamp(1.05rem, 1.6vw, 1.25rem); font-family: var(--font-display); font-weight: 700; line-height: 1.3; }
+    .tweet--feature .tweet__footer { border-color: rgba(251,247,238,0.1); }
+
+    .tweet--medium {
+      background: var(--orange);
+      color: var(--cream);
+      border-color: var(--orange);
+      align-items: flex-start;
+      justify-content: space-between;
+    }
+    .tweet--medium:hover { background: var(--ink); border-color: var(--ink); }
+    .tweet--medium__icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: rgba(251,247,238,0.15);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .tweet--medium__icon svg { width: 24px; height: 24px; color: var(--cream); }
+    .tweet--medium__title {
+      font-family: var(--font-display);
+      font-size: clamp(1.5rem, 2.4vw, 1.875rem);
+      font-weight: 900;
+      line-height: 1.05;
+      letter-spacing: -0.02em;
+    }
+    .tweet--medium__cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-family: var(--font-mono);
+      font-size: 12px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: rgba(251,247,238,0.85);
+    }
+    .tweet--medium__cta svg { width: 16px; height: 16px; }
+    .work {
+      padding: 96px 0;
+      background: var(--bg-work);
+    }
+    .work__head {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 32px;
+      margin-bottom: 64px;
+    }
+    .work__head-blurb {
+      max-width: 420px;
+      font-size: 16px;
+      color: rgba(26, 26, 26, 0.7);
+    }
+
+    .projects {
+      display: flex;
+      gap: 24px;
+      overflow-x: auto;
+      overflow-y: visible;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+      padding: 12px 4px 32px;
+      margin: 0 -4px;
+      scrollbar-width: thin;
+      scrollbar-color: rgba(26,26,26,0.2) transparent;
+    }
+    .projects::-webkit-scrollbar { height: 8px; }
+    .projects::-webkit-scrollbar-track { background: transparent; }
+    .projects::-webkit-scrollbar-thumb { background: rgba(26,26,26,0.2); border-radius: 999px; }
+
+    .project {
+      position: relative;
+      display: block;
+      flex: 0 0 320px;
+      width: 320px;
+      aspect-ratio: 4 / 5;
+      scroll-snap-align: start;
+      border-radius: var(--radius-xl);
+      padding: 24px;
+      overflow: hidden;
+      transition: transform 0.5s ease, box-shadow 0.5s ease;
+      text-decoration: none;
+    }
+    @media (min-width: 768px) {
+      .project { flex: 0 0 360px; width: 360px; }
+    }
+    .project:hover {
+      transform: rotate(0) translateY(-8px) !important;
+      box-shadow: 0 24px 48px rgba(0,0,0,0.18);
+    }
+    .project__big-num {
+      position: absolute;
+      bottom: -50px;
+      right: -24px;
+      font-family: var(--font-display);
+      font-weight: 900;
+      font-size: 14rem;
+      line-height: 1;
+      opacity: 0.18;
+      user-select: none;
+      pointer-events: none;
+    }
+    .project__inner {
+      position: relative;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .project__top {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+    }
+    .project__tag {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      opacity: 0.85;
+      padding: 6px 12px;
+      border-radius: var(--radius-full);
+      border: 1px solid;
+    }
+    .project__arrow {
+      border-radius: 50%;
+      padding: 8px;
+      transition: transform 0.25s ease;
+    }
+    .project:hover .project__arrow { transform: rotate(45deg); }
+    .project__caseline {
+      font-family: var(--font-mono);
+      font-size: 13px;
+      opacity: 0.7;
+      margin-bottom: 12px;
+    }
+    .project__title {
+      font-family: var(--font-display);
+      font-size: clamp(1.5rem, 2.4vw, 1.875rem);
+      font-weight: 900;
+      line-height: 1.05;
+    }
+    .project__meta {
+      margin-top: 24px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-family: var(--font-mono);
+      font-size: 13px;
+      opacity: 0.7;
+    }
+    .project__meta-line { display: inline-block; width: 24px; height: 1px; }
+
+    .work__footer { margin-top: 64px; display: flex; justify-content: center; }
+
+    .clock__pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 20px;
+      border-radius: var(--radius-full);
+      background: rgba(255, 91, 46, 0.1);
+      border: 1px solid rgba(255, 91, 46, 0.3);
+      font-size: 14px;
+      color: var(--ink);
+    }
+    .clock__pill svg { width: 16px; height: 16px; color: var(--orange); }
+    .clock__pill--inverted {
+      background: var(--ink);
+      color: var(--cream);
+      border-color: var(--ink);
+    }
+    .clock__pill--inverted svg { color: var(--cream); }
+
+    /* ---------- About ---------- */
+    .about {
+      padding: 96px 0;
+      background: var(--bg-about);
+      position: relative;
+      overflow: hidden;
+    }
+    .about__blob {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(72px);
+      pointer-events: none;
+    }
+    .about__blob--1 {
+      top: -80px; left: -80px;
+      width: 320px; height: 320px;
+      background: var(--orange);
+      opacity: 0.12;
+    }
+    .about__blob--2 {
+      bottom: -80px; right: -80px;
+      width: 384px; height: 384px;
+      background: var(--sage);
+      opacity: 0.2;
+    }
+    .about > .container { position: relative; z-index: 1; }
+
+    .about__grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 24px;
+    }
+    @media (min-width: 1024px) { .about__grid { grid-template-columns: 1fr 1fr; } }
+
+    .about__card {
+      position: relative;
+      border-radius: var(--radius-xl);
+      padding: 40px;
+      overflow: hidden;
+    }
+    .about__card--dark { background: var(--ink); color: var(--cream); }
+    .about__card--light { background: var(--cream); color: var(--ink); }
+    .about__icon { position: absolute; top: 24px; right: 24px; }
+    .about__icon svg { width: 32px; height: 32px; color: var(--orange); }
+
+    .about__num {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      color: rgba(251, 247, 238, 0.5);
+      margin-bottom: 12px;
+    }
+    .about__num--ink { color: rgba(26, 26, 26, 0.6); }
+
+    .about__title {
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 900;
+      line-height: 0.95;
+      margin-bottom: 24px;
+    }
+    .about__title em { font-weight: 300; }
+
+    .about__body {
+      font-size: clamp(1rem, 1.6vw, 1.125rem);
+      line-height: 1.6;
+      color: rgba(251, 247, 238, 0.8);
+      margin-bottom: 32px;
+    }
+    .about__body--ink { color: rgba(26, 26, 26, 0.7); }
+
+    .about__stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      padding-top: 24px;
+      border-top: 1px solid rgba(251, 247, 238, 0.1);
+    }
+    .about__stat-num { font-size: 1.875rem; font-weight: 900; }
+    .about__stat-label {
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      color: rgba(251, 247, 238, 0.5);
+      margin-top: 4px;
+    }
+
+    .about__tags { display: flex; flex-wrap: wrap; gap: 8px; }
+    .tag {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      padding: 6px 12px;
+      border-radius: var(--radius-full);
+      background: rgba(26, 26, 26, 0.05);
+      border: 1px solid rgba(26, 26, 26, 0.1);
+    }
+
+    .about__frames {
+      margin-top: 32px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+    }
+    .about__frame {
+      position: relative;
+      aspect-ratio: 1;
+      border-radius: var(--radius-sm);
+      overflow: hidden;
+    }
+    .about__frame--1 { background: linear-gradient(135deg, #FF5B2E, #FFD66B); }
+    .about__frame--2 { background: linear-gradient(135deg, #2D5BFF, #7CB07A); }
+    .about__frame--3 { background: linear-gradient(135deg, #1A1A1A, #FF5B2E); }
+    .about__frame svg {
+      position: absolute;
+      bottom: 12px; right: 12px;
+      width: 16px; height: 16px;
+      color: rgba(251, 247, 238, 0.6);
+    }
+
+    .about__quote {
+      margin-top: 64px;
+      max-width: 880px;
+      font-style: italic;
+      font-size: clamp(1.25rem, 2.5vw, 1.875rem);
+      line-height: 1.35;
+      color: rgba(26, 26, 26, 0.8);
+    }
+
+    /* ---------- Footer (now light) ---------- */
+    .footer {
+      padding: 96px 0 32px;
+      background: var(--bg-footer);
+      color: var(--ink);
+      position: relative;
+      overflow: hidden;
+    }
+    .footer__title {
+      font-size: clamp(3rem, 8vw, 6rem);
+      font-weight: 900;
+      line-height: 0.9;
+      margin-bottom: 48px;
+    }
+    .footer__title em { font-weight: 300; }
+
+    .footer__contact {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 32px;
+      padding-bottom: 64px;
+      border-bottom: 1px solid rgba(26, 26, 26, 0.15);
+    }
+    @media (min-width: 768px) { .footer__contact { grid-template-columns: repeat(3, 1fr); } }
+
+    .footer__contact-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      transition: color 0.25s ease;
+    }
+    .footer__contact-item:not(.footer__contact-item--static):hover { color: var(--orange); }
+    .footer__contact-icon {
+      border-radius: 50%;
+      padding: 12px;
+      background: rgba(26, 26, 26, 0.06);
+      transition: background 0.25s ease;
+      flex-shrink: 0;
+    }
+    .footer__contact-item:not(.footer__contact-item--static):hover .footer__contact-icon {
+      background: rgba(255, 91, 46, 0.15);
+    }
+    .footer__contact-icon svg { width: 20px; height: 20px; }
+    .footer__contact-label {
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      color: rgba(26, 26, 26, 0.55);
+      margin-bottom: 4px;
+    }
+    .footer__contact-value { font-size: 1.25rem; font-weight: 700; }
+
+    .footer__cta {
+      padding: 64px 0;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 24px;
+      border-bottom: 1px solid rgba(26, 26, 26, 0.15);
+    }
+    @media (min-width: 768px) { .footer__cta { flex-direction: row; align-items: center; } }
+    .footer__cta-title {
+      font-size: clamp(1.75rem, 3vw, 2.25rem);
+      font-weight: 900;
+      margin-bottom: 8px;
+    }
+    .footer__cta-body { color: rgba(26, 26, 26, 0.65); }
+
+    .footer__bottom {
+      padding-top: 32px;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 24px;
+    }
+    @media (min-width: 768px) { .footer__bottom { flex-direction: row; align-items: center; } }
+    .footer__copy { font-size: 11px; color: rgba(26, 26, 26, 0.55); }
+    .footer__social { display: flex; gap: 12px; }
+    .footer__social a {
+      padding: 10px;
+      border-radius: 50%;
+      background: rgba(26, 26, 26, 0.06);
+      transition: all 0.25s ease;
+      display: inline-flex;
+      color: var(--ink);
+    }
+    .footer__social a:hover { background: var(--orange); color: var(--cream); }
+    .footer__social svg { width: 16px; height: 16px; }
+  </style>
+</head>
+<body>
+
+  <!-- ============== NAV ============== -->
+  <nav class="nav">
+    <div class="container nav__inner">
+      <a href="#" class="nav__logo font-display">avishek<span class="accent-orange">.</span></a>
+      <div class="nav__links">
+        <a href="#work">Work</a>
+        <a href="#articles">Articles</a>
+        <a href="#clock">Journey</a>
+        <a href="#about">Beyond Design</a>
+        <a href="#contact">Contact</a>
+      </div>
+      <a href="#" class="btn btn--dark btn--small">
+        <i data-lucide="download"></i>
+        <span>Download Resume</span>
+      </a>
+    </div>
+  </nav>
+
+  <!-- ============== HERO ============== -->
+  <section class="hero grain">
+    <div class="container hero__inner">
+      <div class="hero__status fade-up" style="animation-delay: 0.1s;">
+        <span class="pulse"><span class="pulse__ring"></span><span class="pulse__dot"></span></span>
+        <span class="font-mono mono-tag">Product Designer, India</span>
+      </div>
+
+      <h1 class="hero__title font-display fade-up" style="animation-delay: 0.2s;">
+        I design <em>sticky</em><br />
+        products that<br />
+        <span class="hero__title-last">
+          users<span class="accent-orange"> love.</span>
+          <svg class="hero__underline" height="20" viewBox="0 0 400 20" preserveAspectRatio="none">
+            <path d="M 5 14 Q 100 4, 200 12 T 395 10" stroke="#FFD66B" stroke-width="6" fill="none" stroke-linecap="round" />
+          </svg>
+        </span>
+      </h1>
+
+      <div class="hero__intro">
+        <p class="hero__intro-lead font-display fade-up" style="animation-delay: 0.4s;">
+          I design user experiences that reduce friction, improve retention, lower churn, and help businesses grow revenue sustainably.
+        </p>
+      </div>
+
+      <!-- HERO CTA: Resume button removed; renamed and promoted to primary -->
+      <div class="hero__cta fade-up" style="animation-delay: 0.6s;">
+        <a href="#work" class="btn btn--dark">
+          <span>Problem solved with design</span>
+          <i data-lucide="arrow-up-right"></i>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============== SKILLS STRIP ============== -->
+  <section class="skills-strip">
+    <div class="container">
+      <div class="skills-strip__grid">
+        <div class="skills-col">
+          <div class="skills-col__head">
+            <span class="skills-col__num font-mono">01</span>
+            <h3 class="skills-col__title font-display">Design Skills</h3>
+          </div>
+          <ul class="skills-col__list">
+            <li>User Research</li>
+            <li>Information Architecture</li>
+            <li>Wireframing &amp; Prototyping</li>
+            <li>Interaction Design</li>
+            <li>Visual &amp; UI Design</li>
+            <li>Usability Testing</li>
+            <li>Design Systems</li>
+          </ul>
+        </div>
+        <div class="skills-col">
+          <div class="skills-col__head">
+            <span class="skills-col__num font-mono">02</span>
+            <h3 class="skills-col__title font-display">Technical Skills</h3>
+          </div>
+          <ul class="skills-col__list">
+            <li>Figma &amp; FigJam</li>
+            <li>Framer</li>
+            <li>Webflow</li>
+            <li>Adobe XD &amp; Illustrator</li>
+            <li>HTML &amp; CSS basics</li>
+            <li>Notion &amp; Miro</li>
+            <li>Principle / After Effects</li>
+          </ul>
+        </div>
+        <div class="skills-col">
+          <div class="skills-col__head">
+            <span class="skills-col__num font-mono">03</span>
+            <h3 class="skills-col__title font-display">Experience</h3>
+          </div>
+          <ul class="skills-col__list">
+            <li>SaaS &amp; B2B</li>
+            <li>Fintech</li>
+            <li>EdTech &amp; Teaching</li>
+            <li>Mobile-first products</li>
+            <li>Enterprise tools</li>
+            <li>Sales &amp; pitch design</li>
+            <li>Cross-cultural research</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============== MARQUEE ============== -->
+  <div class="marquee">
+    <div class="marquee__track" id="marqueeTrack"></div>
+  </div>
+
+  <!-- ============== CLOCK + CAREER GRAPH ============== -->
+  <section id="clock" class="clock">
+    <div class="container">
+      <div class="section-tag">
+        <div class="section-tag__line section-tag__line--orange"></div>
+        <span class="font-mono">The Counter · Live</span>
+      </div>
+
+      <h2 class="section-title font-display">I've been designing for</h2>
+      <p class="section-sub font-display">...since the 7th of March, 2022. The clock has not stopped.</p>
+
+      <!-- New timer matching reference structure -->
+      <div class="timer">
+        <svg class="timer__border" aria-hidden="true">
+          <path class="timer__border-trace" pathLength="60" d="" />
+        </svg>
+        <div class="timer__row">
+          <div class="timer__unit">
+            <div class="timer__num" id="years">00</div>
+            <div class="timer__label">Years</div>
+          </div>
+          <span class="timer__sep">:</span>
+          <div class="timer__unit">
+            <div class="timer__num" id="months">00</div>
+            <div class="timer__label">Months</div>
+          </div>
+          <span class="timer__sep">:</span>
+          <div class="timer__unit">
+            <div class="timer__num" id="days">00</div>
+            <div class="timer__label">Days</div>
+          </div>
+          <span class="timer__sep">:</span>
+          <div class="timer__unit">
+            <div class="timer__num" id="hours">00</div>
+            <div class="timer__label">Hours</div>
+          </div>
+          <span class="timer__sep">:</span>
+          <div class="timer__unit">
+            <div class="timer__num" id="minutes">00</div>
+            <div class="timer__label">Minutes</div>
+          </div>
+          <span class="timer__sep">:</span>
+          <div class="timer__unit">
+            <div class="timer__num" id="seconds">00</div>
+            <div class="timer__label">Seconds</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="clock__caption">
+        <p class="clock__caption-text">That's <span id="totalHours">0</span> hours deep — and counting.</p>
+      </div>
+
+      <!-- ============== T-SHAPED CAREER ============== -->
+      <div class="career">
+        <div class="tlayout">
+          <div class="tlayout__left">
+            <div class="career__head career__head--stacked">
+              <div class="section-tag">
+                <div class="section-tag__line section-tag__line--orange"></div>
+                <span class="font-mono">Career Trajectory · The T-Shape</span>
+              </div>
+              <h3 class="career__title">A T-shaped<br /><em>career.</em></h3>
+            </div>
+
+            <!-- T-trajectory chart card -->
+            <div class="chart">
+          <div class="chart__svg-wrap">
+            <svg viewBox="0 0 1000 540" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="T-shaped career trajectory: two breadth roles on the bottom, three depth roles going up">
+              <!-- The two T lines -->
+              <line x1="120" y1="420" x2="880" y2="420" stroke="#1A1A1A" stroke-opacity="0.22" stroke-width="2"/>
+              <line x1="500" y1="80"  x2="500" y2="420" stroke="#1A1A1A" stroke-opacity="0.22" stroke-width="2"/>
+
+              <!-- ===== Tutoraj (left end of horizontal) ===== -->
+              <g class="tdot" data-experience-id="tutoraj" tabindex="0" role="button" aria-label="Tutoraj — Sales Executive">
+                <circle class="tdot__halo" cx="120" cy="420" r="22"/>
+                <circle class="tdot__hit"  cx="120" cy="420" r="32"/>
+                <circle class="tdot__ring" cx="120" cy="420" r="11"/>
+                <circle class="tdot__core" cx="120" cy="420" r="4"/>
+              </g>
+              <g pointer-events="none">
+                <text x="120" y="466" text-anchor="middle" class="tlabel-role">SALES EXECUTIVE</text>
+                <text x="120" y="490" text-anchor="middle" class="tlabel-company">Tutoraj</text>
+              </g>
+
+              <!-- ===== Red &amp; White Multimedia Institute (right end of horizontal) ===== -->
+              <g class="tdot" data-experience-id="rwm" tabindex="0" role="button" aria-label="Red and White Multimedia — UX Subject Matter Expert">
+                <circle class="tdot__halo" cx="880" cy="420" r="22"/>
+                <circle class="tdot__hit"  cx="880" cy="420" r="32"/>
+                <circle class="tdot__ring" cx="880" cy="420" r="11"/>
+                <circle class="tdot__core" cx="880" cy="420" r="4"/>
+              </g>
+              <g pointer-events="none">
+                <text x="880" y="466" text-anchor="middle" class="tlabel-role">UX SUBJECT MATTER EXPERT</text>
+                <text x="880" y="490" text-anchor="middle" class="tlabel-company">Red &amp; White Multimedia</text>
+              </g>
+
+              <!-- ===== Twist Open UX (bottom of vertical) ===== -->
+              <g class="tdot" data-experience-id="twist" tabindex="0" role="button" aria-label="Twist Open UX — Junior UX Designer">
+                <circle class="tdot__halo" cx="500" cy="340" r="22"/>
+                <circle class="tdot__hit"  cx="500" cy="340" r="32"/>
+                <circle class="tdot__ring" cx="500" cy="340" r="11"/>
+                <circle class="tdot__core" cx="500" cy="340" r="4"/>
+              </g>
+              <g pointer-events="none">
+                <text x="528" y="336" text-anchor="start" class="tlabel-role">JUNIOR UX DESIGNER</text>
+                <text x="528" y="358" text-anchor="start" class="tlabel-company">Twist Open UX</text>
+              </g>
+
+              <!-- ===== 7Span (middle of vertical) ===== -->
+              <g class="tdot" data-experience-id="7span" tabindex="0" role="button" aria-label="7Span — Senior UX Designer">
+                <circle class="tdot__halo" cx="500" cy="220" r="22"/>
+                <circle class="tdot__hit"  cx="500" cy="220" r="32"/>
+                <circle class="tdot__ring" cx="500" cy="220" r="11"/>
+                <circle class="tdot__core" cx="500" cy="220" r="4"/>
+              </g>
+              <g pointer-events="none">
+                <text x="528" y="216" text-anchor="start" class="tlabel-role">SENIOR UX DESIGNER</text>
+                <text x="528" y="238" text-anchor="start" class="tlabel-company">7Span</text>
+              </g>
+
+              <!-- ===== Looking for opportunities (top of vertical) ===== -->
+              <g class="tdot" data-experience-id="open" tabindex="0" role="button" aria-label="Open for Product Designer roles">
+                <circle class="tdot__halo" cx="500" cy="100" r="22"/>
+                <circle class="tdot__hit"  cx="500" cy="100" r="32"/>
+                <circle class="tdot__ring" cx="500" cy="100" r="11"/>
+                <circle class="tdot__core" cx="500" cy="100" r="4"/>
+              </g>
+              <g pointer-events="none">
+                <text x="528" y="96"  text-anchor="start" class="tlabel-role">OPEN FOR WORK</text>
+                <text x="528" y="118" text-anchor="start" class="tlabel-company">Product Designer roles</text>
+              </g>
+            </svg>
+          </div>
+
+          <!-- Mobile alternative: stacked tappable list (same data) -->
+          <div class="tlist">
+            <button class="tlist__item tlist__item--horizontal" data-experience-id="tutoraj">
+              <div class="tlist__marker"></div>
+              <div>
+                <div class="tlist__role">Sales Executive · breadth</div>
+                <div class="tlist__company">Tutoraj</div>
+              </div>
+            </button>
+            <button class="tlist__item" data-experience-id="twist">
+              <div class="tlist__marker"></div>
+              <div>
+                <div class="tlist__role">Junior UX Designer · depth</div>
+                <div class="tlist__company">Twist Open UX</div>
+              </div>
+            </button>
+            <button class="tlist__item tlist__item--horizontal" data-experience-id="rwm">
+              <div class="tlist__marker"></div>
+              <div>
+                <div class="tlist__role">UX SME · breadth</div>
+                <div class="tlist__company">Red &amp; White Multimedia</div>
+              </div>
+            </button>
+            <button class="tlist__item" data-experience-id="7span">
+              <div class="tlist__marker"></div>
+              <div>
+                <div class="tlist__role">Senior UX Designer · depth</div>
+                <div class="tlist__company">7Span</div>
+              </div>
+            </button>
+            <button class="tlist__item" data-experience-id="open">
+              <div class="tlist__marker"></div>
+              <div>
+                <div class="tlist__role">Open for work · depth</div>
+                <div class="tlist__company">Product Designer roles</div>
+              </div>
+            </button>
+          </div>
+
+          <p class="chart__hint">Hover or tap a dot to read each chapter ↓</p>
+        </div>
+        </div><!-- /.tlayout__left -->
+
+        <!-- Description card (updates on dot click/hover) -->
+        <article class="tcard" id="tcard" aria-live="polite">
+          <div class="tcard__inner">
+            <div class="tcard__index">01 / 05</div>
+            <div class="tcard__role">Sales Executive</div>
+            <h4 class="tcard__company">Tutoraj</h4>
+            <p class="tcard__desc"></p>
+          </div>
+        </article>
+        </div><!-- /.tlayout -->
+      </div>
+    </div>
+  </section>
+
+  <!-- ============== PORTFOLIO ============== -->
+  <section id="work" class="work grain">
+    <div class="container">
+      <div class="work__head">
+        <div>
+          <div class="section-tag">
+            <div class="section-tag__line section-tag__line--orange"></div>
+            <span class="font-mono">Selected Work · 2022 → Now</span>
+          </div>
+          <h2 class="section-title font-display">Things I've<br /><em>cooked up.</em></h2>
+        </div>
+      </div>
+
+      <div class="projects" id="projectsGrid"></div>
+
+      <div class="work__footer">
+        <div class="clock__pill clock__pill--inverted">
+          <i data-lucide="coffee"></i>
+          <span class="font-mono">View whole menu</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============== ARTICLES (Twitter-snapshot bento) ============== -->
+  <section id="articles" class="articles">
+    <div class="container">
+      <div class="articles__head">
+        <div>
+          <div class="section-tag">
+            <div class="section-tag__line section-tag__line--orange"></div>
+            <span class="font-mono">Articles by me · Long-form &amp; threads</span>
+          </div>
+          <h2 class="section-title font-display">Things I've<br /><em>written down.</em></h2>
+        </div>
+      </div>
+
+      <div class="bento">
+
+        <a href="#" class="tweet tweet--feature bento__item--lg">
+          <div class="tweet__head">
+            <div class="tweet__avatar">A</div>
+            <div class="tweet__meta">
+              <div class="tweet__name">Avishek Nayak <svg class="tweet__verified" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.4 2.6 3.5-.4 1 3.4 3.1 1.7-1.5 3.2 1.5 3.2-3.1 1.7-1 3.4-3.5-.4L12 22l-2.4-2.6-3.5.4-1-3.4-3.1-1.7L3.5 11.5 2 8.3l3.1-1.7 1-3.4 3.5.4L12 2zm-1.2 13.4l5.7-5.7-1.4-1.4-4.3 4.3-2-2-1.4 1.4 3.4 3.4z"/></svg></div>
+              <div class="tweet__handle">@avisheknayak</div>
+            </div>
+          </div>
+          <p class="tweet__body">Most "dark patterns" weren't malicious to start. They were short-term metrics chasing long-term trust — and someone forgot to revisit. The fix isn't more rules. It's a designer in the room when the metric gets set.</p>
+          <div class="tweet__footer">
+            <div class="tweet__actions">
+              <span><i data-lucide="message-circle"></i> 24</span>
+              <span><i data-lucide="repeat-2"></i> 142</span>
+              <span><i data-lucide="heart"></i> 1.2k</span>
+            </div>
+            <span class="tweet__date">Mar 12</span>
+          </div>
+        </a>
+
+        <a href="#" class="tweet">
+          <div class="tweet__head">
+            <div class="tweet__avatar">A</div>
+            <div class="tweet__meta">
+              <div class="tweet__name">Avishek</div>
+              <div class="tweet__handle">@avisheknayak</div>
+            </div>
+          </div>
+          <p class="tweet__body">Onboarding is not the first 5 screens. Onboarding is the first <strong>moment of value</strong>. Sometimes that's screen 1. Sometimes it's day 14.</p>
+          <div class="tweet__footer">
+            <div class="tweet__actions">
+              <span><i data-lucide="heart"></i> 412</span>
+            </div>
+            <span class="tweet__date">Feb 28</span>
+          </div>
+        </a>
+
+        <a href="#" class="tweet">
+          <div class="tweet__head">
+            <div class="tweet__avatar">A</div>
+            <div class="tweet__meta">
+              <div class="tweet__name">Avishek</div>
+              <div class="tweet__handle">@avisheknayak</div>
+            </div>
+          </div>
+          <p class="tweet__body">Churn isn't a UX problem. Churn is a <strong>promise problem</strong> — the product promised X, delivered Y, and users left to find X somewhere else.</p>
+          <div class="tweet__footer">
+            <div class="tweet__actions">
+              <span><i data-lucide="heart"></i> 689</span>
+            </div>
+            <span class="tweet__date">Feb 14</span>
+          </div>
+        </a>
+
+        <a href="#" class="tweet bento__item--wide">
+          <div class="tweet__head">
+            <div class="tweet__avatar">A</div>
+            <div class="tweet__meta">
+              <div class="tweet__name">Avishek</div>
+              <div class="tweet__handle">@avisheknayak</div>
+            </div>
+          </div>
+          <p class="tweet__body">A thread on upsells: the best ones don't feel like upsells. They feel like the product reading your mind 3 weeks before you knew you needed something. The worst ones feel like a tollbooth on a road you didn't choose.</p>
+          <div class="tweet__footer">
+            <div class="tweet__actions">
+              <span><i data-lucide="message-circle"></i> 31</span>
+              <span><i data-lucide="repeat-2"></i> 88</span>
+              <span><i data-lucide="heart"></i> 540</span>
+            </div>
+            <span class="tweet__date">Jan 30</span>
+          </div>
+        </a>
+
+        <a href="#" class="tweet">
+          <div class="tweet__head">
+            <div class="tweet__avatar">A</div>
+            <div class="tweet__meta">
+              <div class="tweet__name">Avishek</div>
+              <div class="tweet__handle">@avisheknayak</div>
+            </div>
+          </div>
+          <p class="tweet__body">Reviewed 40+ pricing pages this week. Pattern: the ones that <strong>convert</strong> all answer "what happens when I downgrade?" before "what do I get when I upgrade?".</p>
+          <div class="tweet__footer">
+            <div class="tweet__actions">
+              <span><i data-lucide="heart"></i> 318</span>
+            </div>
+            <span class="tweet__date">Jan 18</span>
+          </div>
+        </a>
+
+        <a href="https://medium.com/@avisheknayak" target="_blank" rel="noopener" class="tweet tweet--medium">
+          <div class="tweet--medium__icon">
+            <i data-lucide="book-open"></i>
+          </div>
+          <div>
+            <div class="tweet--medium__title">Read more<br />on Medium</div>
+          </div>
+          <span class="tweet--medium__cta">
+            <span>Open Medium</span>
+            <i data-lucide="arrow-up-right"></i>
+          </span>
+        </a>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============== ABOUT ============== -->
+  <section id="about" class="about">
+    <div class="about__blob about__blob--1"></div>
+    <div class="about__blob about__blob--2"></div>
+
+    <div class="container">
+      <div class="section-tag">
+        <div class="section-tag__line section-tag__line--ink"></div>
+        <span class="font-mono">Beyond the pixels</span>
+      </div>
+
+      <h2 class="section-title font-display">When I close<br />the laptop,</h2>
+
+      <div class="about__grid">
+        <!-- Cycling card -->
+        <div class="about__card about__card--dark float-1">
+          <div class="about__icon spin-slow"><i data-lucide="bike"></i></div>
+          <div class="about__num font-mono">01 · Endurance</div>
+          <h3 class="about__title font-display">Cycling &amp;<br /><em class="accent-orange">triathlon training.</em></h3>
+          <p class="about__body">I'm building toward Ironman Goa 2027 — 3.8 km swim, 180 km bike, 42.2 km run. Most days start before sunrise with a ride, intervals, or a long run. The same principles apply to design: small daily reps, brutal honesty about your splits, and respect for the long game over flashy PRs.</p>
+
+          <div class="about__stats">
+            <div><div class="about__stat-num font-display" style="color:#FFD66B">2027</div><div class="about__stat-label font-mono">Ironman target</div></div>
+            <div><div class="about__stat-num font-display" style="color:#7CB07A">5AM</div><div class="about__stat-label font-mono">Most rides start</div></div>
+            <div><div class="about__stat-num font-display" style="color:#FF5B2E">180k</div><div class="about__stat-label font-mono">Bike leg goal (km)</div></div>
+          </div>
+        </div>
+
+        <!-- Photography card -->
+        <div class="about__card about__card--light float-2">
+          <div class="about__icon"><i data-lucide="camera" style="color:#2D5BFF"></i></div>
+          <div class="about__num about__num--ink font-mono">02 · Frames</div>
+          <h3 class="about__title about__title--ink font-display">Photography &amp;<br /><em style="color:#2D5BFF">slow looking.</em></h3>
+          <p class="about__body about__body--ink">Mostly riding shots, race-day candids, and the in-between moments people forget to notice. A camera trains the same muscle UX work needs — finding the one frame in a hundred that actually says something. Composition before words. Restraint before expression.</p>
+
+          <div class="about__tags">
+            <span class="tag">Race day</span>
+            <span class="tag">Golden hour</span>
+            <span class="tag">Street</span>
+            <span class="tag">Candid</span>
+            <span class="tag">35mm</span>
+            <span class="tag">Black &amp; white</span>
+          </div>
+
+          <div class="about__frames">
+            <div class="about__frame about__frame--1 grain"><i data-lucide="mountain"></i></div>
+            <div class="about__frame about__frame--2 grain"><i data-lucide="mountain"></i></div>
+            <div class="about__frame about__frame--3 grain"><i data-lucide="mountain"></i></div>
+          </div>
+        </div>
+      </div>
+
+      <p class="about__quote font-display">"The best UX lessons I've learned didn't come from books — they came from a flat tire 60km from home and figuring out how to keep moving. Same instinct, different domain."</p>
+    </div>
+  </section>
+
+  <!-- ============== FOOTER (now light) ============== -->
+  <footer id="contact" class="footer">
+    <div class="container">
+      <div class="section-tag">
+        <div class="section-tag__line section-tag__line--orange"></div>
+        <span class="font-mono">Get in touch · Open for work</span>
+      </div>
+
+      <h2 class="footer__title font-display">Let's build<br />something users<br /><em class="accent-orange">actually love.</em></h2>
+
+      <div class="footer__contact">
+        <a href="mailto:workdesk.avishek@gmail.com" class="footer__contact-item">
+          <div class="footer__contact-icon"><i data-lucide="mails"></i></div>
+          <div>
+            <div class="footer__contact-label font-mono">Email</div>
+            <div class="footer__contact-value font-display">workdesk.avishek@gmail.com</div>
+          </div>
+        </a>
+        <a href="tel:+919925403798" class="footer__contact-item">
+          <div class="footer__contact-icon"><i data-lucide="phone"></i></div>
+          <div>
+            <div class="footer__contact-label font-mono">Phone</div>
+            <div class="footer__contact-value font-display">+91 99254 03798</div>
+          </div>
+        </a>
+        <div class="footer__contact-item footer__contact-item--static">
+          <div class="footer__contact-icon"><i data-lucide="map-pin"></i></div>
+          <div>
+            <div class="footer__contact-label font-mono">Based in</div>
+            <div class="footer__contact-value font-display">Bengaluru, KA</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer__cta">
+        <div>
+          <div class="footer__cta-title font-display">Want the full picture?</div>
+          <div class="footer__cta-body">A two-page PDF with the receipts — projects, results, references.</div>
+        </div>
+        <a href="#" class="btn btn--dark">
+          <i data-lucide="download"></i>
+          <span>Download Resume</span>
+        </a>
+      </div>
+
+      <div class="footer__bottom">
+        <div class="font-mono footer__copy">© <span id="year">2026</span> Avishek Nayak — Designed with restraint, built with care.</div>
+        <div class="footer__social">
+          <a href="https://linkedin.com/in/avisheknayak" target="_blank" rel="noopener" aria-label="LinkedIn"><i data-lucide="linkedin"></i></a>
+          <a href="https://instagram.com/avisheknayak.13" target="_blank" rel="noopener" aria-label="Instagram"><i data-lucide="instagram"></i></a>
+          <a href="mailto:workdesk.avishek@gmail.com" aria-label="Email"><i data-lucide="mails"></i></a>
+          <a href="https://wa.me/919925403798" target="_blank" rel="noopener" aria-label="WhatsApp"><i data-lucide="phone"></i></a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    /* =========================================================
+       AVISHEK NAYAK · Portfolio — single-file edition
+       ========================================================= */
+
+    /* ---------- Data (edit here) ---------- */
+    const DATA = {
+      designStartDate: "2022-03-07T00:00:00",
+      marquee: [
+        "Designer", "Strategist", "Cyclist",
+        "Storyteller", "Triathlete-in-training", "Coffee-driven"
+      ],
+      projects: [
+        { n: "01", tag: "Enterprise · Simulation",   title: "Designing a Motor Simulation Tool for Complex Engineering Workflows", bg: "#FF5B2E", accent: "#FBF7EE", tilt: -2,   href: "#" },
+        { n: "02", tag: "Sports · Performance Data", title: "Increasing Athlete Performance Through Football Data Research",       bg: "#1A1A1A", accent: "#FFD66B", tilt:  1.5, href: "#" },
+        { n: "03", tag: "SaaS · Retention",          title: "Improving User Retention for a Dubai-Based Ticketing Platform",       bg: "#7CB07A", accent: "#FBF7EE", tilt: -1,   href: "#" },
+        { n: "04", tag: "Healthcare · Workflow",     title: "Reducing Drug Trial Timelines from Months to Weeks",                  bg: "#FFD66B", accent: "#1A1A1A", tilt:  2,   href: "#" },
+        { n: "05", tag: "AI · Healthcare Upsell",    title: "Up-selling Nutrition Products through an AI Healthcare Agent",        bg: "#2D5BFF", accent: "#FBF7EE", tilt: -1.5, href: "#" }
+      ]
+    };
+
+    /* ---------- Helpers ---------- */
+    const pad = (n) => String(n).padStart(2, '0');
+    const $ = (sel) => document.querySelector(sel);
+
+    /* ---------- Live clock ---------- */
+    function updateClock() {
+      const start = new Date(DATA.designStartDate);
+      const now = new Date();
+
+      let years   = now.getFullYear() - start.getFullYear();
+      let months  = now.getMonth()    - start.getMonth();
+      let days    = now.getDate()     - start.getDate();
+      let hours   = now.getHours()    - start.getHours();
+      let minutes = now.getMinutes()  - start.getMinutes();
+      let seconds = now.getSeconds()  - start.getSeconds();
+
+      if (seconds < 0) { seconds += 60; minutes--; }
+      if (minutes < 0) { minutes += 60; hours--; }
+      if (hours   < 0) { hours   += 24; days--; }
+      if (days    < 0) {
+        const prevMonth = new Date(now.getFullYear(), now.getMonth(), 0);
+        days += prevMonth.getDate();
+        months--;
+      }
+      if (months  < 0) { months += 12; years--; }
+
+      const totalHours = Math.floor((now - start) / 3600000);
+
+      $('#years').textContent     = pad(years);
+      $('#months').textContent    = pad(months);
+      $('#days').textContent      = pad(days);
+      $('#hours').textContent     = pad(hours);
+      $('#minutes').textContent   = pad(minutes);
+      $('#seconds').textContent   = pad(seconds);
+      $('#totalHours').textContent = totalHours.toLocaleString();
+    }
+
+    /* ---------- Marquee ---------- */
+    function buildMarquee() {
+      const track = $('#marqueeTrack');
+      const star = '<svg class="star" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.4 7.4H22l-6.2 4.5L18.2 22 12 17.3 5.8 22l2.4-8.1L2 9.4h7.6L12 2z"/></svg>';
+      const cycle = DATA.marquee.map(item => `<span>${item}</span>${star}`).join('');
+      track.innerHTML = cycle + cycle;
+    }
+
+    /* ---------- Projects ---------- */
+    function renderProjects() {
+      const grid = $('#projectsGrid');
+      grid.innerHTML = DATA.projects.map(p => {
+        const href = p.href || '#';
+        const caseLabel = href === '#' ? 'Case study soon' : 'Read case study';
+        return `
+        <a href="${href}" class="project" style="background:${p.bg}; color:${p.accent}; transform:rotate(${p.tilt}deg);">
+          <div class="project__big-num" style="color:${p.accent}">${p.n}</div>
+          <div class="project__inner">
+            <div class="project__top">
+              <span class="project__tag" style="border-color:${p.accent}40">${p.tag}</span>
+              <div class="project__arrow" style="background:${p.accent}20">
+                <i data-lucide="arrow-up-right"></i>
+              </div>
+            </div>
+            <div>
+              <div class="project__caseline">// case ${p.n}</div>
+              <h3 class="project__title">${p.title}</h3>
+              <div class="project__meta">
+                <span class="project__meta-line" style="background:${p.accent}"></span>
+                <span>${caseLabel}</span>
+              </div>
+            </div>
+          </div>
+        </a>
+      `;
+      }).join('');
+    }
+
+    /* ---------- T-shaped career experiences ---------- */
+    const EXPERIENCES = [
+      {
+        id: 'tutoraj',
+        company: 'Tutoraj',
+        role: 'Sales Executive',
+        description: "Started my career as a sales executive — implementing the sales funnel, pitching the product's long-term value to potential users, and creating pitch decks that improved the sales cycle. The first lesson in why people actually buy. (Dec 2021 – Mar 2022)"
+      },
+      {
+        id: 'twist',
+        company: 'Twist Open UX',
+        role: 'Junior UX Designer',
+        description: "My first proper UX role. Worked on 2 projects and a UX research collaboration with Google Research Labs. Also got the chance to showcase the work to the Osaka Design team of the Japanese Government — early proof that good thinking travels. (Mar 2022 – Mar 2024)"
+      },
+      {
+        id: 'rwm',
+        company: 'Red & White Multimedia Institute',
+        role: 'UX Subject Matter Expert',
+        description: "After 2 years in a leading design studio, I spent 9 months in Rajkot, Gujarat — sharing my design experiences and learnings with students to help them get placed at design studios and MNCs. Teaching, it turned out, was the fastest way to learn. (Apr 2024 – Oct 2024)"
+      },
+      {
+        id: '7span',
+        company: '7Span',
+        role: 'Senior UX Designer',
+        description: "The urge to keep learning brought me back to the corporate world. I joined 7Span — the largest service agency in Ahmedabad — as a designer, and was soon promoted to a Senior Design role leading a team of 3 junior designers. (Feb 2025 – Present)"
+      },
+      {
+        id: 'open',
+        company: 'Looking for Product Designer Opportunities',
+        role: 'Open for Work',
+        description: "Now looking for Product Design roles where I can go deep on the product life cycle — improving features based on drop-off rates, understanding adoption time, why happy flows still create friction, working through edge cases, conversion and churn rates, and balancing data-driven decisions with the emotional aspect of brand and product."
+      }
+    ];
+
+    let activeExpId = null;
+
+    function activateExperience(id) {
+      if (id === activeExpId) return;
+      activeExpId = id;
+
+      // Highlight all elements that share this experience id (SVG dot + list item)
+      document.querySelectorAll('[data-experience-id]').forEach(el => {
+        el.classList.toggle('is-active', el.dataset.experienceId === id);
+      });
+
+      const exp = EXPERIENCES.find(e => e.id === id);
+      if (!exp) return;
+
+      const card = $('#tcard');
+      card.classList.add('is-swapping');
+      setTimeout(() => {
+        const idx = EXPERIENCES.indexOf(exp) + 1;
+        card.querySelector('.tcard__index').textContent =
+          `${pad(idx)} / ${pad(EXPERIENCES.length)}`;
+        card.querySelector('.tcard__role').textContent    = exp.role;
+        card.querySelector('.tcard__company').textContent = exp.company;
+        card.querySelector('.tcard__desc').textContent    = exp.description;
+        card.classList.remove('is-swapping');
+      }, 200);
+    }
+
+    function setupTChart() {
+      document.querySelectorAll('[data-experience-id]').forEach(el => {
+        el.addEventListener('click',      () => activateExperience(el.dataset.experienceId));
+        el.addEventListener('mouseenter', () => activateExperience(el.dataset.experienceId));
+        el.addEventListener('focus',      () => activateExperience(el.dataset.experienceId));
+      });
+      // Default selection: start of journey
+      activateExperience('tutoraj');
+    }
+
+    /* ---------- Timer border (clockwise second-hand) ---------- */
+    function setupTimerBorder() {
+      const card = document.querySelector('.timer');
+      if (!card) return;
+      const svg  = card.querySelector('.timer__border');
+      const path = svg.querySelector('.timer__border-trace');
+      const r = 16;
+      function update() {
+        const W = card.offsetWidth, H = card.offsetHeight;
+        svg.setAttribute('viewBox', `0 0 ${W} ${H}`);
+        svg.setAttribute('width', W);
+        svg.setAttribute('height', H);
+        const d = `M ${W} ${r} L ${W} ${H-r} A ${r} ${r} 0 0 1 ${W-r} ${H} L ${r} ${H} A ${r} ${r} 0 0 1 0 ${H-r} L 0 ${r} A ${r} ${r} 0 0 1 ${r} 0 L ${W-r} 0 A ${r} ${r} 0 0 1 ${W} ${r}`;
+        path.setAttribute('d', d);
+      }
+      update();
+      window.addEventListener('resize', update);
+      // Sync animation with current second of real time
+      path.style.animationDelay = `-${new Date().getSeconds()}s`;
+    }
+
+    /* ---------- Init ---------- */
+    function init() {
+      $('#year').textContent = new Date().getFullYear();
+      buildMarquee();
+      renderProjects();
+      setupTChart();
+      setupTimerBorder();
+      updateClock();
+      setInterval(updateClock, 1000);
+
+      // All Lucide icons get stroke-width 1.5 as requested
+      if (window.lucide) {
+        window.lucide.createIcons({
+          attrs: {
+            'stroke-width': 1.5
+          }
+        });
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', init);
+  </script>
+</body>
+</html>
