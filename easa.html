@@ -1,0 +1,1057 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EASA — Case Study</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Afacad:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Bricolage+Grotesque:opsz,wght@12..96,300;12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&display=swap" rel="stylesheet">
+<style>
+:root {
+  --black: #0D0D0D;
+  --white: #F5F3EE;
+  --cream: #EDE9E1;
+  --accent: #005693;
+  --accent-dim: #E6F0F8;
+  --mid: #6B6860;
+  --border: #D8D4CC;
+  --surface: #F0EDE8;
+  --tag-bg: #1A4FFF;
+  --tag-text: #F5F3EE;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Bricolage Grotesque', sans-serif;
+  background: var(--white);
+  color: var(--black);
+  font-size: 16px;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* TYPOGRAPHY */
+h1 { font-family: 'Afacad', sans-serif; font-size: clamp(36px, 6vw, 72px); font-weight: 700; letter-spacing: -0.02em; }
+h2, h3, h4 { font-family: 'Bricolage Grotesque', sans-serif; line-height: 1.15; }
+h2 { font-size: clamp(24px, 3.5vw, 38px); font-weight: 700; letter-spacing: -0.02em; }
+h3 { font-size: clamp(16px, 2vw, 20px); font-weight: 600; letter-spacing: -0.01em; }
+h4 { font-size: 13px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--mid); }
+
+p { color: #3A3832; font-weight: 300; font-size: 16px; line-height: 1.8; }
+
+/* LAYOUT */
+.container { max-width: 960px; margin: 0 auto; padding: 0 32px; }
+.container-wide { max-width: 1100px; margin: 0 auto; padding: 0 32px; }
+
+/* HERO */
+.hero {
+  background: var(--black);
+  color: var(--white);
+  padding: 80px 0 0;
+  overflow: hidden;
+  position: relative;
+}
+.hero::before {
+  content: 'EASA';
+  position: absolute;
+  font-family: 'Afacad', sans-serif;
+  font-weight: 800;
+  font-size: clamp(120px, 20vw, 260px);
+  color: rgba(255,255,255,0.04);
+  right: -20px;
+  top: 50%;
+  transform: translateY(-50%);
+  letter-spacing: -0.05em;
+  pointer-events: none;
+  white-space: nowrap;
+}
+.hero-eyebrow {
+  display: flex; align-items: center; gap: 12px;
+  margin-bottom: 28px;
+}
+.hero-eyebrow span {
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  color: rgba(245,243,238,0.45);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+.hero-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent); flex-shrink: 0; }
+.hero h1 { color: var(--white); margin-bottom: 20px; max-width: 700px; }
+.hero-sub {
+  font-size: 18px;
+  color: rgba(245,243,238,0.55);
+  font-weight: 300;
+  max-width: 560px;
+  line-height: 1.7;
+  margin-bottom: 48px;
+}
+.hero-meta {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 0;
+  border-top: 1px solid rgba(255,255,255,0.1);
+  margin-top: 48px;
+}
+.hero-meta-item {
+  padding: 28px 0 28px;
+  border-right: 1px solid rgba(255,255,255,0.08);
+  padding-right: 32px;
+  padding-left: 0;
+}
+.hero-meta-item:not(:first-child) { padding-left: 32px; }
+.hero-meta-item:last-child { border-right: none; }
+.meta-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(245,243,238,0.35);
+  margin-bottom: 6px;
+}
+.meta-val {
+  font-family: 'Bricolage Grotesque', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--white);
+}
+
+/* TAGS */
+.tags { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 0; }
+.tag {
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  padding: 5px 12px;
+  border-radius: 2px;
+  border: 1px solid rgba(255,255,255,0.15);
+  color: rgba(245,243,238,0.6);
+}
+
+/* SECTIONS */
+.section { padding: 96px 0; }
+.section-alt { background: var(--cream); }
+.section-dark { background: var(--black); color: var(--white); }
+.section-dark p { color: rgba(245,243,238,0.6); }
+.section-dark h2 { color: var(--white); }
+.section-dark h4 { color: rgba(245,243,238,0.35); }
+
+.section-header { margin-bottom: 56px; }
+.section-header h4 { margin-bottom: 12px; }
+.section-header h2 { margin-bottom: 16px; }
+.section-header p { max-width: 560px; }
+
+/* NUMBERED SECTION LABEL */
+.num-label {
+  display: flex; align-items: center; gap: 16px; margin-bottom: 48px;
+}
+.num-label .num {
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  color: var(--accent);
+  letter-spacing: 0.1em;
+}
+.num-label .line {
+  flex: 1; height: 1px; background: var(--border);
+}
+
+/* CALLOUT */
+.callout {
+  border-left: 3px solid var(--accent);
+  padding: 20px 24px;
+  background: var(--accent-dim);
+  border-radius: 0 8px 8px 0;
+  margin: 32px 0;
+}
+.callout-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 8px;
+}
+.callout p { color: #1A3080; font-size: 15px; }
+
+.callout-dark {
+  border-left: 3px solid rgba(255,255,255,0.3);
+  padding: 20px 24px;
+  background: rgba(255,255,255,0.05);
+  border-radius: 0 8px 8px 0;
+  margin: 32px 0;
+}
+.callout-dark p { color: rgba(245,243,238,0.75); font-size: 15px; }
+.callout-dark .callout-label { color: rgba(245,243,238,0.4); }
+
+/* GRID CARDS */
+.card-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 32px 0; }
+.card {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 24px;
+}
+.card-alt { background: var(--surface); border-color: transparent; }
+.card h3 { font-size: 15px; margin-bottom: 8px; }
+.card p { font-size: 14px; color: var(--mid); line-height: 1.6; }
+.card-num {
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  color: var(--accent);
+  letter-spacing: 0.08em;
+  margin-bottom: 10px;
+}
+
+/* FINDING CARDS */
+.finding {
+  display: grid;
+  grid-template-columns: 48px 1fr;
+  gap: 20px;
+  align-items: start;
+  padding: 24px 0;
+  border-bottom: 1px solid var(--border);
+}
+.finding:last-child { border-bottom: none; }
+.finding-num {
+  font-family: 'Afacad', sans-serif;
+  font-size: 28px;
+  font-weight: 800;
+  color: var(--border);
+  line-height: 1;
+  padding-top: 4px;
+}
+.finding h3 { font-size: 16px; margin-bottom: 6px; }
+.finding p { font-size: 14px; }
+
+/* CONSTRAINT BLOCK */
+.constraint {
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  overflow: hidden;
+  margin-bottom: 24px;
+}
+.constraint-header {
+  background: var(--black);
+  color: var(--white);
+  padding: 16px 24px;
+  display: flex; align-items: center; gap: 12px;
+}
+.constraint-header h3 { font-size: 15px; color: var(--white); font-weight: 600; }
+.constraint-badge {
+  margin-left: auto;
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  color: rgba(245,243,238,0.4);
+  text-transform: uppercase;
+}
+.constraint-body { padding: 24px; }
+.constraint-body p { font-size: 14px; margin-bottom: 12px; }
+.constraint-body p:last-child { margin-bottom: 0; }
+.resolution {
+  background: var(--surface);
+  border-radius: 8px;
+  padding: 14px 18px;
+  margin-top: 16px;
+}
+.resolution-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--mid);
+  margin-bottom: 6px;
+}
+.resolution p { font-size: 13px; color: #3A3832; }
+
+/* PHASE STEPS */
+.phase-list { display: flex; flex-direction: column; gap: 0; margin: 32px 0; }
+.phase-item {
+  display: grid;
+  grid-template-columns: 60px 1fr;
+  gap: 24px;
+  position: relative;
+  padding-bottom: 32px;
+}
+.phase-item:last-child { padding-bottom: 0; }
+.phase-item::before {
+  content: '';
+  position: absolute;
+  left: 29px;
+  top: 40px;
+  bottom: 0;
+  width: 1px;
+  background: var(--border);
+}
+.phase-item:last-child::before { display: none; }
+.phase-circle {
+  width: 40px; height: 40px;
+  border-radius: 50%;
+  background: var(--black);
+  color: var(--white);
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Bricolage Grotesque', sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  flex-shrink: 0;
+  position: relative;
+  z-index: 1;
+}
+.phase-content { padding-top: 8px; }
+.phase-content h3 { font-size: 16px; margin-bottom: 6px; }
+.phase-content p { font-size: 14px; }
+
+/* LAW CARDS */
+.law-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 32px 0; }
+.law-card {
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 20px;
+  position: relative;
+  overflow: hidden;
+}
+.law-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: var(--accent);
+}
+.law-name {
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  color: var(--accent);
+  margin-bottom: 8px;
+}
+.law-card h3 { font-size: 14px; font-weight: 600; margin-bottom: 8px; color: var(--black); }
+.law-card p { font-size: 13px; line-height: 1.6; color: var(--mid); }
+.law-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 12px; }
+.law-tag {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  padding: 3px 8px;
+  background: var(--surface);
+  border-radius: 3px;
+  color: var(--mid);
+  letter-spacing: 0.05em;
+}
+
+/* TABLE */
+.cs-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 24px 0;
+  font-size: 14px;
+}
+.cs-table th {
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--mid);
+  text-align: left;
+  padding: 10px 16px;
+  border-bottom: 2px solid var(--border);
+  background: var(--surface);
+}
+.cs-table td {
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--border);
+  color: #3A3832;
+  vertical-align: top;
+}
+.cs-table tr:last-child td { border-bottom: none; }
+.cs-table tr:hover td { background: var(--surface); }
+
+/* OUTCOMES */
+.outcome-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; margin: 32px 0; }
+.outcome-card {
+  background: var(--surface);
+  border-radius: 12px;
+  padding: 24px;
+  border: 1px solid var(--border);
+}
+.outcome-icon {
+  width: 36px; height: 36px;
+  background: var(--accent);
+  border-radius: 8px;
+  margin-bottom: 14px;
+  display: flex; align-items: center; justify-content: center;
+}
+.outcome-icon svg { width: 18px; height: 18px; fill: white; }
+.outcome-card h3 { font-size: 14px; margin-bottom: 6px; }
+.outcome-card p { font-size: 13px; color: var(--mid); }
+
+/* QUOTE */
+.big-quote {
+  border-left: 4px solid var(--accent);
+  padding: 24px 32px;
+  margin: 48px 0;
+}
+.big-quote blockquote {
+  font-family: 'Afacad', sans-serif;
+  font-size: clamp(18px, 2.5vw, 24px);
+  font-weight: 600;
+  line-height: 1.45;
+  color: var(--black);
+  font-style: normal;
+}
+
+/* PLACEHOLDER */
+.placeholder {
+  background: var(--surface);
+  border: 2px dashed var(--border);
+  border-radius: 12px;
+  padding: 48px 32px;
+  text-align: center;
+  margin: 32px 0;
+}
+.placeholder p {
+  font-family: 'DM Mono', monospace;
+  font-size: 12px;
+  color: var(--mid);
+  letter-spacing: 0.06em;
+}
+
+/* NAV */
+.case-nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(245,243,238,0.92);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+  padding: 0 32px;
+}
+.nav-inner {
+  max-width: 960px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 32px;
+  height: 52px;
+  overflow-x: auto;
+}
+.nav-link {
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--mid);
+  text-decoration: none;
+  white-space: nowrap;
+  transition: color .15s;
+}
+.nav-link:hover { color: var(--black); }
+.nav-back {
+  font-family: 'Syne', sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--black);
+  text-decoration: none;
+  margin-right: auto;
+  white-space: nowrap;
+}
+
+/* DIVIDER */
+.divider { border: none; border-top: 1px solid var(--border); margin: 0; }
+
+/* INSIGHT BOX */
+.insight {
+  background: var(--black);
+  color: var(--white);
+  border-radius: 12px;
+  padding: 28px 32px;
+  margin: 32px 0;
+}
+.insight-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 10px;
+}
+.insight p { color: rgba(245,243,238,0.8); font-size: 15px; }
+
+/* TWO COL */
+.two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: start; }
+.two-col-wide { display: grid; grid-template-columns: 2fr 3fr; gap: 48px; align-items: start; }
+
+/* STAKEHOLDER TABLE */
+.stake-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+  margin: 24px 0;
+}
+.stake-table th {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(245,243,238,0.4);
+  padding: 10px 16px;
+  text-align: left;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+.stake-table td {
+  padding: 14px 16px;
+  color: rgba(245,243,238,0.75);
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  vertical-align: top;
+}
+.stake-table tr:hover td { background: rgba(255,255,255,0.03); }
+
+/* ITERATION TABLE */
+.iter-table { width: 100%; border-collapse: collapse; margin: 24px 0; }
+.iter-table td { padding: 14px 0; border-bottom: 1px solid var(--border); vertical-align: top; font-size: 14px; }
+.iter-table td:first-child { font-family: 'Afacad', sans-serif; font-weight: 700; font-size: 28px; color: var(--border); padding-right: 24px; width: 60px; line-height: 1; }
+.iter-table tr:last-child td { border-bottom: none; }
+
+/* MOBILE */
+@media (max-width: 640px) {
+  .card-grid, .law-grid, .two-col, .two-col-wide { grid-template-columns: 1fr; }
+  .hero-meta { grid-template-columns: 1fr 1fr; }
+  .hero-meta-item { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.08); padding: 20px 0; padding-left: 0 !important; }
+  .container, .container-wide { padding: 0 20px; }
+  .section { padding: 64px 0; }
+}
+
+/* PRINT-FRIENDLY */
+@media print { .case-nav { display: none; } }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="container">
+    <div class="hero-eyebrow">
+      <span class="hero-dot"></span>
+      <span>Case Study — Product Design</span>
+      <span>·</span>
+      <span>13 months</span>
+    </div>
+    <h1>Designing for Complexity —<br>50 Years of Data,<br>Zero Compromises</h1>
+    <p class="hero-sub">Redesigning EASA's electrical motor simulation tool from a Windows-only desktop application to a fully responsive web platform — without stripping the depth that expert engineers depend on.</p>
+    <div class="tags" style="margin-bottom: 48px;">
+      <span class="tag">UX Design</span>
+      <span class="tag">SaaS</span>
+      <span class="tag">Design System</span>
+      <span class="tag">Information Architecture</span>
+      <span class="tag">Accessibility</span>
+      <span class="tag">Industrial Tech</span>
+    </div>
+    <div class="hero-meta">
+      <div class="hero-meta-item">
+        <div class="meta-label">Company</div>
+        <div class="meta-val">EASA International</div>
+      </div>
+      <div class="hero-meta-item">
+        <div class="meta-label">Timeline</div>
+        <div class="meta-val">13 months</div>
+      </div>
+      <div class="hero-meta-item">
+        <div class="meta-label">My Role</div>
+        <div class="meta-val">End-to-end UX Designer</div>
+      </div>
+      <div class="hero-meta-item">
+        <div class="meta-label">Platform</div>
+        <div class="meta-val">Web + Mobile Adaptive</div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- PROBLEM -->
+<section class="section" id="problem">
+  <div class="container">
+    <div class="num-label">
+      <span class="num">01</span>
+      <div class="line"></div>
+    </div>
+    <div class="section-header">
+      <h4>The Problem</h4>
+      <h2>A tool built for experts that only experts could survive</h2>
+      <p>EASA is a global authority in the electrical motor repair and maintenance industry. Their desktop simulation tool held over 50 years of motor data — indispensable to the engineers who knew it.</p>
+    </div>
+
+    <div class="card-grid">
+      <div class="card card-alt">
+        <div class="card-num">01</div>
+        <h3>Windows-only</h3>
+        <p>The application ran exclusively on Windows, creating a hard ceiling on global adoption and limiting access to engineers tied to a specific OS.</p>
+      </div>
+      <div class="card card-alt">
+        <div class="card-num">02</div>
+        <h3>3-month training requirement</h3>
+        <p>Every new user required a dedicated trainer for three full months before independent use. The complexity of the tool had been placed entirely on the user.</p>
+      </div>
+      <div class="card card-alt">
+        <div class="card-num">03</div>
+        <h3>Redundant actions</h3>
+        <p>Duplicate and Clone motor performed identical functions. Multiple buttons triggered the same process. The interface had accumulated feature debt across years of additions.</p>
+      </div>
+      <div class="card card-alt">
+        <div class="card-num">04</div>
+        <h3>Nested tab overload</h3>
+        <p>Tabs within tabs within tabs. The desktop app allowed these to be pinned — a Windows-specific behavior with no direct browser equivalent.</p>
+      </div>
+    </div>
+
+    <div class="callout">
+      <div class="callout-label">Business Trigger</div>
+      <p>The client needed a subscription-based SaaS model — a freemium tier to attract new engineers globally, and a web platform that could run anywhere, anytime, with less friction. The Windows-only constraint was the ceiling.</p>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- DISCOVERY -->
+<section class="section section-alt" id="discovery">
+  <div class="container">
+    <div class="num-label">
+      <span class="num">02</span>
+      <div class="line" style="background: #C8C4BC;"></div>
+    </div>
+    <div class="section-header">
+      <h4>Discovery Phase</h4>
+      <h2>24 hours of business understanding before touching a canvas</h2>
+      <p>Structured sessions across a month to get a full overview of the product, business model, user base, and key stakeholders. Every session documented as minutes of meeting — so every design decision could be traced back to observed behavior.</p>
+    </div>
+
+    <div class="placeholder"><p>[ Insert: Discovery session video — key questionnaire and 5 KPI findings ]</p></div>
+
+    <h3 style="margin-bottom: 20px;">Stakeholders & System</h3>
+    <div style="overflow-x: auto; margin-bottom: 40px;">
+    <table class="cs-table">
+      <thead>
+        <tr>
+          <th>Stakeholder</th>
+          <th>Role in System</th>
+          <th>Design Relevance</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Eugene</strong></td>
+          <td>Team Lead — domain expert and primary research proxy</td>
+          <td>Primary contextual inquiry participant. His workflows defined the IA.</td>
+        </tr>
+        <tr>
+          <td><strong>Timothy</strong></td>
+          <td>EASA Product Creator — database management and integrity</td>
+          <td>Defined data structure constraints and filter logic requirements.</td>
+        </tr>
+        <tr>
+          <td><strong>EASA Company</strong></td>
+          <td>Operator — motor simulation platform owner</td>
+          <td>Business goals, subscription model direction, and sign-off authority.</td>
+        </tr>
+      </tbody>
+    </table>
+    </div>
+
+    <h3 style="margin-bottom: 24px;">5 Key Findings</h3>
+    <div>
+      <div class="finding">
+        <div class="finding-num">01</div>
+        <div>
+          <h3>Redundant actions bred confusion</h3>
+          <p>Duplicate and Clone performed identical functions. Years of additions without a design system created a UI that had no internal logic — only institutional memory.</p>
+        </div>
+      </div>
+      <div class="finding">
+        <div class="finding-num">02</div>
+        <div>
+          <h3>Training was a symptom, not a solution</h3>
+          <p>The 3-month onboarding wasn't a knowledge gap — it was an interface gap. The complexity of the tool had been transferred entirely to the user. Tesler's Law in plain sight.</p>
+        </div>
+      </div>
+      <div class="finding">
+        <div class="finding-num">03</div>
+        <div>
+          <h3>Tab nesting had no web equivalent</h3>
+          <p>The desktop app's pinnable nested tabs were a Windows-specific convention. Replicating them in a browser viewport was technically and experientially impossible.</p>
+        </div>
+      </div>
+      <div class="finding">
+        <div class="finding-num">04</div>
+        <div>
+          <h3>Role-based UI had no visual language</h3>
+          <p>Features were enabled or disabled by role — normal users, engineers, senior engineers — with no clear visual cues distinguishing what was accessible, locked, or irrelevant.</p>
+        </div>
+      </div>
+      <div class="finding">
+        <div class="finding-num">05</div>
+        <div>
+          <h3>50 years of data, no entry point for new users</h3>
+          <p>The motor database was internally coherent — but completely opaque to anyone without training. The data structure made sense only after the onboarding that preceded it.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="placeholder"><p>[ Insert: Existing IA and Site Map — desktop application ]</p></div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- CONSTRAINTS -->
+<section class="section" id="constraints">
+  <div class="container">
+    <div class="num-label">
+      <span class="num">03</span>
+      <div class="line"></div>
+    </div>
+    <div class="section-header">
+      <h4>Key Constraints</h4>
+      <h2>The decisions that shaped every screen</h2>
+      <p>Three constraints defined the architecture of the entire platform. Each one required negotiation, not just execution.</p>
+    </div>
+
+    <div class="constraint">
+      <div class="constraint-header">
+        <h3>The no-scroll demand</h3>
+        <span class="constraint-badge">Client Constraint → Design Negotiation</span>
+      </div>
+      <div class="constraint-body">
+        <p>The client's initial position was firm: all data must be visible in the viewport with no scrolling — matching the feel of the desktop application. This was pushed back on immediately.</p>
+        <p>After deeper sessions, the real concern surfaced: they were afraid important data would be hidden or forgotten below the fold. That was a UX problem, not a technical requirement.</p>
+        <div class="resolution">
+          <div class="resolution-label">Resolution</div>
+          <p>Established which data was truly primary. Demonstrated how browser zoom and resolution behavior works. Made the case that white space reduces cognitive load — it is not wasted space. Compromise reached: critical data stays above the fold. Secondary data can scroll.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="constraint">
+      <div class="constraint-header">
+        <h3>Nested tabs in a browser viewport</h3>
+        <span class="constraint-badge">Technical Constraint → Structural Solution</span>
+      </div>
+      <div class="constraint-body">
+        <p>The desktop app allowed tabs to be pinned and deeply nested. A browser has a fixed viewport — direct replication was not feasible.</p>
+        <div class="resolution">
+          <div class="resolution-label">Resolution — Conditional Tab Model</div>
+          <p>Top navigation layer handles primary context switching. A secondary tab at the bottom of the viewport appears only when output is generated — conditional, triggered by user action, not always present.</p>
+        </div>
+        <div class="callout" style="margin-top: 16px;">
+          <div class="callout-label">Retrospective</div>
+          <p>In hindsight, a split-screen model would have been more intuitive — once output is generated, the screen divides equally between input and result. The bottom tab works, but requires the user to understand its conditionality. A split screen makes it self-evident. This is what I would design differently today.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="constraint">
+      <div class="constraint-header">
+        <h3>The 1,000 motor filter constraint</h3>
+        <span class="constraint-badge">System Constraint → UX Pattern</span>
+      </div>
+      <div class="constraint-body">
+        <p>The database held an enormous volume of motor records. The system could not display results above 1,000 motors — querying without filtering would return data that couldn't render or be meaningfully navigated.</p>
+        <div class="resolution">
+          <div class="resolution-label">Resolution — Progressive Narrowing with Live Feedback</div>
+          <p>Real-time result count shown throughout filtering — guiding users toward a manageable set without a hard error block. As the count approached the threshold, users felt momentum, not restriction. The filter was designed as a collaborative narrowing process, not a gatekeeper.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="placeholder"><p>[ Insert: Filter panel with live result count — desktop and mobile ]</p></div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- DESIGN PROCESS -->
+<section class="section section-dark" id="design">
+  <div class="container">
+    <div class="num-label">
+      <span class="num" style="color: var(--accent);">04</span>
+      <div class="line" style="background: rgba(255,255,255,0.1);"></div>
+    </div>
+    <div class="section-header">
+      <h4>Design Phase</h4>
+      <h2>From information architecture to a locked design system</h2>
+      <p>End-to-end design process across 13 months — every phase documented, every decision traceable to a discovery finding.</p>
+    </div>
+
+    <div class="phase-list">
+      <div class="phase-item">
+        <div class="phase-circle">01</div>
+        <div class="phase-content">
+          <h3 style="color: var(--white);">Information Architecture</h3>
+          <p>Full IA built from all session notes, user journey mapping, and heuristic findings. Every branch validated against actual user paths observed with Eugene.</p>
+        </div>
+      </div>
+      <div class="phase-item">
+        <div class="phase-circle">02</div>
+        <div class="phase-content">
+          <h3 style="color: var(--white);">Wireframes — 4 Iterations</h3>
+          <p>Desktop and mobile wireframes iterated 4–5 times across both form factors before client sign-off. Wireframes were the primary alignment tool — clients visualised intent here far better than in IA diagrams alone.</p>
+          <div class="callout-dark" style="margin-top: 16px;">
+            <div class="callout-label">Iteration Log</div>
+            <p>v1 — Full feature exposure, desktop-first · v2 — Role-based scoping introduced · v3 — Mobile adaptive views, bottom sheet filter · v4 — Conditional bottom tab locked, card/table toggle finalised, client sign-off</p>
+          </div>
+        </div>
+      </div>
+      <div class="phase-item">
+        <div class="phase-circle">03</div>
+        <div class="phase-content">
+          <h3 style="color: var(--white);">Design System — Built from Scratch</h3>
+          <p>Proprietary design system in Figma covering color tokens, typography scale, spacing system, component states, and role-based variants. Built specifically for the edge cases of a data-dense industrial SaaS — 20-column tables, compact card views, conditional UI states.</p>
+        </div>
+      </div>
+      <div class="phase-item">
+        <div class="phase-circle">04</div>
+        <div class="phase-content">
+          <h3 style="color: var(--white);">Developer Collaboration</h3>
+          <p>Backend sessions clarified data structure and filter logic. Frontend sessions resolved component-level feasibility — including a mid-project keyboard accessibility rework that required restructuring certain components into single focusable containers for logical tab order.</p>
+        </div>
+      </div>
+      <div class="phase-item">
+        <div class="phase-circle">05</div>
+        <div class="phase-content">
+          <h3 style="color: var(--white);">Usability Reviews</h3>
+          <p>Informal reviews with Eugene at key structural points — validating whether layouts and navigation made conceptual sense before committing to UI execution. All design decisions were locked at wireframe stage before any visual design began.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="placeholder" style="background: rgba(255,255,255,0.04); border-color: rgba(255,255,255,0.1);"><p style="color: rgba(245,243,238,0.35);">[ Insert: Wireframe iteration video — 4 stages with annotations ]</p></div>
+    <div class="placeholder" style="background: rgba(255,255,255,0.04); border-color: rgba(255,255,255,0.1);"><p style="color: rgba(245,243,238,0.35);">[ Insert: Design system overview — component library, token structure, states ]</p></div>
+
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- KEY DECISIONS -->
+<section class="section" id="decisions">
+  <div class="container">
+    <div class="num-label">
+      <span class="num">05</span>
+      <div class="line"></div>
+    </div>
+    <div class="section-header">
+      <h4>Key Design Decisions</h4>
+      <h2>Where the thinking happened</h2>
+    </div>
+
+    <h3 style="margin-bottom: 8px;">Card view vs. Table view — The 20-column problem</h3>
+    <p style="margin-bottom: 24px;">Motor data tables ran to 20+ columns. Both views were required — but a card view with internal scroll dramatically increases cognitive load for older users. The solution: a compact card with a fixed, curated set of critical columns for identification and comparison. Full table view available as a toggle for power users.</p>
+    <div class="placeholder"><p>[ Insert: Card view vs. table view toggle — motor listing screen ]</p></div>
+
+    <h3 style="margin-bottom: 8px; margin-top: 40px;">Designing for an older user base</h3>
+    <p style="margin-bottom: 24px;">The primary users were experienced, senior engineers. Every spatial, sizing, and grouping decision was made with this in mind — generous touch targets, logical keyboard navigation, WCAG-compliant contrast across all data and number-heavy screens.</p>
+
+    <h3 style="margin-bottom: 8px; margin-top: 40px;">Mobile adaptation — drawing the line</h3>
+    <p style="margin-bottom: 20px;">Adaptive rather than fully responsive. Structure and navigation adapted to mobile — but data-intensive views remained desktop-first.</p>
+    <table class="cs-table">
+      <thead>
+        <tr><th>Element</th><th>Desktop</th><th>Mobile</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Filter panel</td><td>Right-side drawer</td><td>Bottom sheet</td></tr>
+        <tr><td>Motor listing</td><td>Table + card toggle</td><td>Card view default</td></tr>
+        <tr><td>Navigation</td><td>Full top nav</td><td>Condensed top nav</td></tr>
+        <tr><td>Output tab</td><td>Conditional bottom tab</td><td>Conditional bottom tab</td></tr>
+      </tbody>
+    </table>
+
+    <div class="placeholder"><p>[ Insert: Visual design prototype video — all key screens ]</p></div>
+    <div class="placeholder"><p>[ Insert: Old V4 desktop comparison video ]</p></div>
+
+    <div class="insight">
+      <div class="insight-label">Senior Design Insight</div>
+      <p>Some features are non-negotiable. Business decisions sometimes require the designer to find the best way to present something, not to question whether it should be there. Knowing when to advocate for the user and when to align with the business is a judgment call — not a rule. Recognising it, naming it, and communicating it to stakeholders is part of the design work.</p>
+    </div>
+
+    <div class="placeholder"><p>[ Insert: Freemium nudge moments — feature gate and upsell screens ]</p></div>
+    <div class="placeholder"><p>[ Insert: A/B testing — before/after screen comparisons ]</p></div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- UX LAWS -->
+<section class="section section-alt" id="laws">
+  <div class="container">
+    <div class="num-label">
+      <span class="num">06</span>
+      <div class="line" style="background: #C8C4BC;"></div>
+    </div>
+    <div class="section-header">
+      <h4>UX Laws Applied</h4>
+      <h2>Every decision rooted in principle</h2>
+      <p>Laws applied as design decisions — each principle drove a specific choice, shaped a trade-off, or resolved a constraint.</p>
+    </div>
+
+    <h4 style="margin-bottom: 20px;">Cognitive Load</h4>
+    <div class="law-grid">
+      <div class="law-card">
+        <div class="law-name">Hick's Law</div>
+        <h3>Designed for the highest role, restricted downward</h3>
+        <p>Fewer visible choices at each role level = faster decision-making. The interface was never stripped down — it was appropriately scoped.</p>
+        <div class="law-tags"><span class="law-tag">Role-based hiding</span><span class="law-tag">Permission UI</span></div>
+      </div>
+      <div class="law-card">
+        <div class="law-name">Miller's Law</div>
+        <h3>Compact card with fixed critical columns</h3>
+        <p>20 columns couldn't be fully shown on a card. A curated set of critical columns for identification — full table for power users.</p>
+        <div class="law-tags"><span class="law-tag">Card/table toggle</span><span class="law-tag">Priority columns</span></div>
+      </div>
+      <div class="law-card">
+        <div class="law-name">Cognitive Load Theory</div>
+        <h3>Rejected inner card scroll for older users</h3>
+        <p>Scroll within a card creates double tracking load. Fixed columns eliminated extraneous cognitive load for the primary demographic.</p>
+        <div class="law-tags"><span class="law-tag">Card design</span><span class="law-tag">Target sizing</span></div>
+      </div>
+      <div class="law-card">
+        <div class="law-name">Tesler's Law</div>
+        <h3>Absorbed complexity into the system</h3>
+        <p>The 3-month training was complexity placed on the user. Interface-imposed complexity was eliminated; domain complexity was supported.</p>
+        <div class="law-tags"><span class="law-tag">Remove duplicates</span><span class="law-tag">Smart defaults</span></div>
+      </div>
+    </div>
+
+    <h4 style="margin-bottom: 20px; margin-top: 40px;">Navigation & Structure</h4>
+    <div class="law-grid">
+      <div class="law-card">
+        <div class="law-name">Jakob's Law</div>
+        <h3>Web patterns, not desktop patterns</h3>
+        <p>The desktop's pinnable tabs were a Windows convention. Web navigation patterns were adopted — content was new, interaction model was familiar.</p>
+        <div class="law-tags"><span class="law-tag">Top nav</span><span class="law-tag">Bottom sheet</span></div>
+      </div>
+      <div class="law-card">
+        <div class="law-name">Progressive Disclosure</div>
+        <h3>Conditional bottom tab on output only</h3>
+        <p>The bottom tab doesn't exist until output is generated. Reveal complexity only when the user demonstrates intent through action.</p>
+        <div class="law-tags"><span class="law-tag">Output-triggered UI</span><span class="law-tag">Conditional tab</span></div>
+      </div>
+      <div class="law-card">
+        <div class="law-name">Law of Proximity</div>
+        <h3>Controls grouped by task, not alphabetically</h3>
+        <p>The filter panel grouped parameters by motor specification category — the way engineers think, not the way a database is structured.</p>
+        <div class="law-tags"><span class="law-tag">Filter grouping</span><span class="law-tag">IA structure</span></div>
+      </div>
+      <div class="law-card">
+        <div class="law-name">Serial Position Effect</div>
+        <h3>Critical actions at primary and terminal positions</h3>
+        <p>Features buried in the middle of sequences in the old app were regularly missed. Most important actions at beginning and end.</p>
+        <div class="law-tags"><span class="law-tag">Navigation order</span><span class="law-tag">Feature priority</span></div>
+      </div>
+    </div>
+
+    <h4 style="margin-bottom: 20px; margin-top: 40px;">System Feedback</h4>
+    <div class="law-grid">
+      <div class="law-card">
+        <div class="law-name">Goal-Gradient Effect</div>
+        <h3>Live result count during filtering</h3>
+        <p>Rather than a hard block at 1,000 motors, a live counter showed proximity to the goal throughout. Users felt momentum, not restriction.</p>
+        <div class="law-tags"><span class="law-tag">Live filter count</span><span class="law-tag">Progressive narrowing</span></div>
+      </div>
+      <div class="law-card">
+        <div class="law-name">Von Restorff Effect</div>
+        <h3>Critical data visually distinct from supporting data</h3>
+        <p>In a data-dense interface, everything equally visible means nothing is visible. The design system established clear visual hierarchy.</p>
+        <div class="law-tags"><span class="law-tag">Typography hierarchy</span><span class="law-tag">Column priority</span></div>
+      </div>
+    </div>
+
+    <h4 style="margin-bottom: 20px; margin-top: 40px;">Accessibility</h4>
+    <div class="law-grid">
+      <div class="law-card">
+        <div class="law-name">Fitts' Law</div>
+        <h3>Generous targets for an older user base</h3>
+        <p>Controls designed with generous sizing and spacing. Directly influenced the keyboard accessibility component restructure for logical tab order.</p>
+        <div class="law-tags"><span class="law-tag">Control sizing</span><span class="law-tag">Keyboard nav</span></div>
+      </div>
+      <div class="law-card">
+        <div class="law-name">WCAG 2.1</div>
+        <h3>Contrast enforced at design system level</h3>
+        <p>Contrast ratios embedded in all color tokens. Color never used as the sole communicator of meaning — critical in a tool where misreading a spec has real consequences.</p>
+        <div class="law-tags"><span class="law-tag">Token system</span><span class="law-tag">Focus states</span></div>
+      </div>
+      <div class="law-card">
+        <div class="law-name">Aesthetic-Usability Effect</div>
+        <h3>Made a data tool feel considered, not clinical</h3>
+        <p>Users perceive aesthetically pleasing interfaces as more usable. For a freemium product, visual consideration was a trust signal before any interaction.</p>
+        <div class="law-tags"><span class="law-tag">White space</span><span class="law-tag">System consistency</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- OUTCOMES -->
+<section class="section" id="outcomes">
+  <div class="container">
+    <div class="num-label">
+      <span class="num">07</span>
+      <div class="line"></div>
+    </div>
+    <div class="section-header">
+      <h4>Outcomes</h4>
+      <h2>What shipped and what it meant</h2>
+    </div>
+
+    <div class="outcome-grid">
+      <div class="outcome-card">
+        <div class="outcome-icon">
+          <svg viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+        </div>
+        <h3>Live in UAT</h3>
+        <p>Platform completed UAT with positive reception from engineers — moving to production.</p>
+      </div>
+      <div class="outcome-card">
+        <div class="outcome-icon">
+          <svg viewBox="0 0 24 24"><path d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+        </div>
+        <h3>Reduced training dependency</h3>
+        <p>Engineers oriented without the 3-month hand-holding the desktop tool demanded.</p>
+      </div>
+      <div class="outcome-card">
+        <div class="outcome-icon">
+          <svg viewBox="0 0 24 24"><path d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"/></svg>
+        </div>
+        <h3>Approved across all roles</h3>
+        <p>Engineers across all user tiers understood the new interface without back-and-forth.</p>
+      </div>
+      <div class="outcome-card">
+        <div class="outcome-icon">
+          <svg viewBox="0 0 24 24"><path d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
+        </div>
+        <h3>Minimal post-launch rework</h3>
+        <p>A few minor features from real usage — handled without significant rework. The upfront thinking held.</p>
+      </div>
+    </div>
+
+    <div class="placeholder"><p>[ Insert: Final UI screens — dashboard, motor listing, filter panel, output view, mobile views ]</p></div>
+  </div>
+</section>
+
+<!-- REFLECTION -->
+<section class="section section-dark">
+  <div class="container">
+    <div class="num-label">
+      <span class="num" style="color: var(--accent);">08</span>
+      <div class="line" style="background: rgba(255,255,255,0.1);"></div>
+    </div>
+    <h4>Reflection</h4>
+    <div class="big-quote" style="border-color: var(--accent); margin-top: 24px;">
+      <blockquote style="color: var(--white);">"The hardest design work on EASA wasn't drawing screens. It was thinking through every possible use case before a single line hit the canvas — from font height to scroll behaviour, from viewport fitting to convincing a client that white space is doing real work."</blockquote>
+    </div>
+    <p style="margin-top: 24px; max-width: 640px;">The one thing I would design differently: the tab management structure. The conditional bottom tab works — but it requires the user to understand its conditionality. A split-screen model, where generating output divides the screen equally between input and result, would have made that relationship spatially obvious from the first use. That is the growth this project produced.</p>
+  </div>
+</section>
+
+</body>
+</html>
