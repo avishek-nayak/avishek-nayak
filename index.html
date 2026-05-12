@@ -9,7 +9,7 @@
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,400..900,0..100,0..1;1,9..144,400..900,0..100,0..1&family=DM+Sans:wght@400;500;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Gochi+Hand&family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,400..900,0..100,0..1;1,9..144,400..900,0..100,0..1&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet" />
 
   <!-- Lucide icons -->
   <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
@@ -30,13 +30,13 @@
 
       /* Subtle section tints (each section gets one) */
       --bg-hero:      #FBF7EE;
-      --bg-clock:     #FCEEE3;  /* peach   */
-      --bg-work:      #F0EAD5;  /* wheat   */
-      --bg-about:     #E8EFE0;  /* sage    */
-      --bg-footer:    #DED4B7;  /* deepest warm cream */
+      --bg-clock:     #FBF7EE;
+      --bg-work:      #FBF7EE;
+      --bg-about:     #FBF7EE;
+      --bg-footer:    #FBF7EE;
 
-      --font-display: 'Fraunces', 'Times New Roman', serif;
-      --font-body:    'DM Sans', -apple-system, sans-serif;
+      --font-display: 'Gochi Hand', 'Caveat', cursive;
+      --font-body:    'Fraunces', 'Times New Roman', serif;
       --font-mono:    'JetBrains Mono', 'Courier New', monospace;
 
       --radius-sm: 12px;
@@ -77,8 +77,29 @@
     /* ---------- Type ---------- */
     .font-display {
       font-family: var(--font-display);
-      font-variation-settings: 'SOFT' 80, 'WONK' 1;
-      letter-spacing: -0.02em;
+      letter-spacing: 0;
+    }
+
+    /* ---------- Fraunces overrides for body-style copy ---------- */
+    .hero__intro-lead,
+    .hero__intro-lead p,
+    .hero__intro-bullet,
+    .tweet, .tweet *,
+    .tcard__role,
+    .tcard__company,
+    .tcard__desc,
+    .tlabel-company,
+    .tlist__company,
+    .about__title,
+    .about__title em,
+    .about__body,
+    .about__quote,
+    .section-sub,
+    .clock .section-sub,
+    .footer__contact-value,
+    .footer__cta-title,
+    .footer__cta-body {
+      font-family: var(--font-body) !important;
     }
     .font-body  { font-family: var(--font-body); }
     .font-mono  { font-family: var(--font-mono); }
@@ -108,6 +129,22 @@
     }
     @keyframes ping { 75%, 100% { transform: scale(2); opacity: 0; } }
 
+    /* ---------- Scroll reveal ---------- */
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1),
+                  transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+      will-change: opacity, transform;
+    }
+    .reveal.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .reveal { opacity: 1; transform: none; transition: none; }
+    }
+
     .spin-slow  { animation: spin-slow 18s linear infinite; }
     .fade-up    { animation: fadeUp 0.8s ease-out backwards; }
     .float-1    { animation: float 4s ease-in-out infinite; --rot: -1deg; transform: rotate(-1deg); }
@@ -127,18 +164,19 @@
       border: none;
       cursor: pointer;
       border-radius: var(--radius-full);
-      font-family: var(--font-body);
-      font-weight: 500;
-      font-size: 16px;
+      font-family: var(--font-display);
+      font-weight: 400;
+      font-size: 18px;
       padding: 12px 24px;
       transition: all 0.25s ease;
       text-decoration: none;
       white-space: nowrap;
+      letter-spacing: 0.02em;
     }
     .btn svg { width: 20px; height: 20px; }
     .btn:hover { gap: 12px; }
-    .btn--dark      { background: var(--ink); color: var(--cream); }
-    .btn--dark:hover { background: var(--orange); }
+    .btn--dark      { background: transparent; color: var(--ink); border: 1px solid var(--ink); }
+    .btn--dark:hover { background: var(--ink); color: var(--cream); }
     .btn--light     { background: var(--cream); color: var(--ink); }
     .btn--light:hover { background: var(--butter); }
     .btn--outline   { background: transparent; color: var(--ink); border: 2px solid var(--ink); }
@@ -211,11 +249,6 @@
     @media (min-width: 768px) { .nav__links { display: flex; } }
 
     /* ---------- Hero ---------- */
-    .hero {
-      padding: 128px 0 80px;
-      position: relative;
-      background: var(--bg-hero);
-    }
     .hero__inner { position: relative; }
 
     .sticker {
@@ -250,11 +283,12 @@
       background: var(--sage);
     }
 
+    .hero { padding: 110px 0 64px; position: relative; background: var(--bg-hero); }
     .hero__title {
-      font-size: clamp(2.5rem, 8vw, 7.5rem);
-      font-weight: 900;
-      line-height: 0.9;
-      margin-bottom: 32px;
+      font-size: clamp(2rem, 5.5vw, 4.5rem);
+      font-weight: 700;
+      line-height: 1.05;
+      margin-bottom: 24px;
     }
     .hero__title .tw-char { opacity: 0; }
     .hero__title .tw-char.is-shown { opacity: 1; }
@@ -274,7 +308,7 @@
     .hero__title-last { position: relative; display: inline-block; }
     .hero__underline { position: absolute; bottom: -8px; left: 0; width: 100%; }
 
-    .hero__intro { display: block; max-width: 720px; margin-top: 64px; }
+    .hero__intro { display: block; width: 100%; margin-top: 32px; }
     .hero__intro-lead {
       font-size: clamp(1.125rem, 1.8vw, 1.375rem);
       line-height: 1.55;
@@ -289,7 +323,7 @@
       color: rgba(26, 26, 26, 0.7);
     }
 
-    .hero__cta { margin-top: 48px; display: flex; flex-wrap: wrap; gap: 16px; }
+    .hero__cta { margin-top: 32px; display: flex; flex-wrap: wrap; gap: 16px; }
 
     /* ---------- Marquee ---------- */
     .marquee {
@@ -464,6 +498,131 @@
       text-align: center;
     }
 
+    /* ---------- Horizontal career timeline ---------- */
+    .timeline-scroll {
+      overflow-x: auto;
+      overflow-y: visible;
+      scrollbar-width: thin;
+      scrollbar-color: rgba(26,26,26,0.2) transparent;
+      padding: 16px 0;
+    }
+    .timeline-scroll::-webkit-scrollbar { height: 8px; }
+    .timeline-scroll::-webkit-scrollbar-track { background: transparent; }
+    .timeline-scroll::-webkit-scrollbar-thumb { background: rgba(26,26,26,0.2); border-radius: 999px; }
+    .timeline {
+      position: relative;
+      min-width: 1500px;
+      height: 380px;
+      padding: 0 60px;
+    }
+    .timeline__line {
+      position: absolute;
+      left: 60px;
+      right: 60px;
+      top: 50%;
+      height: 2px;
+      background: rgba(26,26,26,0.18);
+      transform: translateY(-1px);
+    }
+    .timeline__year {
+      position: absolute;
+      top: calc(50% + 40px);
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      pointer-events: none;
+    }
+    .timeline__year-tick {
+      width: 1px;
+      height: 14px;
+      background: rgba(26,26,26,0.3);
+      margin-top: -46px;
+      margin-bottom: 18px;
+    }
+    .timeline__year-label {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.2em;
+      color: rgba(26,26,26,0.5);
+    }
+    .timeline__item {
+      position: absolute;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      background: none;
+      border: none;
+      cursor: pointer;
+      text-align: center;
+      font-family: inherit;
+      padding: 0;
+      width: 200px;
+      z-index: 2;
+    }
+    .timeline__item--top    .timeline__card      { order: 0; margin-bottom: 0; }
+    .timeline__item--top    .timeline__connector { order: 1; }
+    .timeline__item--top    .timeline__dot       { order: 2; }
+    .timeline__item--bottom .timeline__dot       { order: 0; }
+    .timeline__item--bottom .timeline__connector { order: 1; }
+    .timeline__item--bottom .timeline__card      { order: 2; margin-top: 0; }
+    .timeline__connector {
+      width: 1px;
+      height: 28px;
+      background: rgba(26,26,26,0.3);
+    }
+    .timeline__dot {
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      background: var(--cream);
+      border: 3px solid var(--orange);
+      box-shadow: 0 0 0 5px var(--cream);
+      transition: all 0.25s ease;
+    }
+    .timeline__item:hover .timeline__dot,
+    .timeline__item.is-active .timeline__dot {
+      background: var(--orange);
+      transform: scale(1.18);
+    }
+    .timeline__card {
+      background: var(--cream);
+      border: 1px solid rgba(26,26,26,0.15);
+      border-radius: var(--radius-sm);
+      padding: 12px 14px;
+      width: 100%;
+      transition: all 0.25s ease;
+    }
+    .timeline__item:hover .timeline__card,
+    .timeline__item.is-active .timeline__card {
+      border-color: var(--orange);
+      box-shadow: 0 10px 28px -14px rgba(255,91,46,0.45);
+    }
+    .timeline__role {
+      font-family: var(--font-mono);
+      font-size: 9px;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      color: rgba(26,26,26,0.55);
+      margin-bottom: 4px;
+    }
+    .timeline__company {
+      font-family: var(--font-body);
+      font-weight: 700;
+      font-size: 14px;
+      color: var(--ink);
+      line-height: 1.2;
+      margin-bottom: 4px;
+    }
+    .timeline__period {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 0.05em;
+      color: rgba(26,26,26,0.45);
+    }
+
     /* T-chart dots (interactive) */
     .tdot { cursor: pointer; }
     .tdot__hit { fill: transparent; }
@@ -573,9 +732,11 @@
       border-radius: var(--radius-md);
       padding: 40px;
       position: relative;
-      min-height: 240px;
       box-shadow: 0 12px 40px -20px rgba(0,0,0,0.3);
       overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
     }
     .tcard__inner {
       transition: opacity 0.22s ease, transform 0.22s ease;
@@ -584,28 +745,33 @@
       opacity: 0;
       transform: translateY(8px);
     }
-    .tcard__index {
-      font-family: var(--font-mono);
-      font-size: 11px;
-      letter-spacing: 0.2em;
-      color: rgba(251, 247, 238, 0.5);
-      margin-bottom: 16px;
+    .tcard__company {
+      font-family: var(--font-display);
+      font-size: clamp(1.75rem, 3.5vw, 2.5rem);
+      font-weight: 900;
+      margin-bottom: 12px;
+      letter-spacing: -0.02em;
+      line-height: 1.05;
+    }
+    .tcard__roleline {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: baseline;
+      gap: 8px;
+      margin-bottom: 24px;
     }
     .tcard__role {
       font-family: var(--font-display);
       font-style: italic;
       font-size: 1.25rem;
       color: var(--orange);
-      margin-bottom: 8px;
       font-weight: 400;
     }
-    .tcard__company {
-      font-family: var(--font-display);
-      font-size: clamp(1.75rem, 3.5vw, 2.5rem);
-      font-weight: 900;
-      margin-bottom: 24px;
-      letter-spacing: -0.02em;
-      line-height: 1.05;
+    .tcard__period {
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      letter-spacing: 0.1em;
+      color: rgba(251, 247, 238, 0.55);
     }
     .tcard__desc {
       font-size: clamp(0.95rem, 1.4vw, 1.05rem);
@@ -944,9 +1110,27 @@
       opacity: 0.18;
       user-select: none;
       pointer-events: none;
+      z-index: 2;
+    }
+    .project__cover {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      z-index: 0;
+    }
+    .project--hasimg::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(0,0,0,0.15) 0%, rgba(0,0,0,0.7) 100%);
+      z-index: 1;
     }
     .project__inner {
       position: relative;
+      z-index: 2;
       height: 100%;
       display: flex;
       flex-direction: column;
@@ -1050,6 +1234,8 @@
       gap: 24px;
     }
     @media (min-width: 1024px) { .about__grid { grid-template-columns: 1fr 1fr; } }
+    /* When photography card hidden, cycling card spans full row */
+    .about__grid:has(.about__card[style*="display: none"]) { grid-template-columns: 1fr; }
 
     .about__card {
       position: relative;
@@ -1167,7 +1353,8 @@
       padding-bottom: 64px;
       border-bottom: 1px solid rgba(26, 26, 26, 0.15);
     }
-    @media (min-width: 768px) { .footer__contact { grid-template-columns: repeat(3, 1fr); } }
+    @media (min-width: 768px) { .footer__contact { grid-template-columns: repeat(2, 1fr); } }
+    @media (min-width: 1024px) { .footer__contact { grid-template-columns: repeat(4, 1fr); } }
 
     .footer__contact-item {
       display: flex;
@@ -1241,7 +1428,7 @@
   <!-- ============== NAV ============== -->
   <nav class="nav">
     <div class="container nav__inner">
-      <a href="#" class="nav__logo font-display">avishek<span class="accent-orange">.</span></a>
+      <a href="#" class="nav__logo font-display">avisheknayak<span class="accent-orange">.</span></a>
       <div class="nav__links">
         <a href="#work">Work</a>
         <a href="#articles">Articles</a>
@@ -1279,7 +1466,7 @@
         <div class="hero__intro-lead font-display fade-up" style="animation-delay: 0.4s;">
           <p>Hi, I am <strong>Avishek Nayak</strong>, with <strong>4 years of experience</strong> that began in a</p>
           <p class="hero__intro-bullet">— Design studio where most discussions revolved around design guidelines, learning design systems, variables, auto-layouts, advanced prototyping, and more.</p>
-          <p class="hero__intro-bullet">— Then moved to a service company working directly with clients, understanding their business, improving <em>user retention rates</em>, building monetary features, disagreeing with developers and project managers on design decisions, and handing off design files.</p>
+          <p class="hero__intro-bullet">— Then moved to a service company<br />restructuring the design process in the team, managing the cross department work, negotiating with stakeholders on how design decisions can increase their revenue, decrease click-through rates, converting drop off to conversion rates, disagreeing with devs &amp; PMs in design decisions to coming to the middle ground.</p>
           <p>In these 4 years, I learnt a lot about what actually goes into design, why a non-linear design process rarely works in the real world, and why some designs aren't feasible for certain tech stacks. Evolving through this, I'm now on a journey to join as a <span class="accent-orange"><strong>Product Designer</strong></span>.</p>
         </div>
       </div>
@@ -1299,68 +1486,12 @@
     <div class="marquee__track" id="marqueeTrack"></div>
   </div>
 
-  <!-- ============== SKILLS STRIP ============== -->
-  <section class="skills-strip">
-    <div class="container">
-      <div class="skills-strip__grid">
-        <div class="skills-col">
-          <div class="skills-col__head">
-            <span class="skills-col__num font-mono">01</span>
-            <h3 class="skills-col__title font-display">Design Skills</h3>
-          </div>
-          <ul class="skills-col__list">
-            <li>User Research</li>
-            <li>Information Architecture</li>
-            <li>Wireframing &amp; Prototyping</li>
-            <li>Interaction Design</li>
-            <li>Visual &amp; UI Design</li>
-            <li>Usability Testing</li>
-            <li>Design Systems</li>
-          </ul>
-        </div>
-        <div class="skills-col">
-          <div class="skills-col__head">
-            <span class="skills-col__num font-mono">02</span>
-            <h3 class="skills-col__title font-display">Technical Skills</h3>
-          </div>
-          <ul class="skills-col__list">
-            <li>Figma &amp; FigJam</li>
-            <li>Framer</li>
-            <li>Webflow</li>
-            <li>Adobe XD &amp; Illustrator</li>
-            <li>HTML &amp; CSS basics</li>
-            <li>Notion &amp; Miro</li>
-            <li>Principle / After Effects</li>
-          </ul>
-        </div>
-        <div class="skills-col">
-          <div class="skills-col__head">
-            <span class="skills-col__num font-mono">03</span>
-            <h3 class="skills-col__title font-display">Experience</h3>
-          </div>
-          <ul class="skills-col__list">
-            <li>SaaS &amp; B2B</li>
-            <li>Fintech</li>
-            <li>EdTech &amp; Teaching</li>
-            <li>Mobile-first products</li>
-            <li>Enterprise tools</li>
-            <li>Sales &amp; pitch design</li>
-            <li>Cross-cultural research</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </section>
 
   <!-- ============== PORTFOLIO ============== -->
   <section id="work" class="work grain">
     <div class="container">
       <div class="work__head">
         <div>
-          <div class="section-tag">
-            <div class="section-tag__line section-tag__line--orange"></div>
-            <span class="font-mono">Selected Work · 2022 → Now</span>
-          </div>
           <h2 class="section-title font-display">Things I've<br /><em>cooked up.</em></h2>
         </div>
       </div>
@@ -1381,34 +1512,11 @@
     <div class="container">
       <div class="articles__head">
         <div>
-          <div class="section-tag">
-            <div class="section-tag__line section-tag__line--orange"></div>
-            <span class="font-mono">Articles by me · Long-form &amp; threads</span>
-          </div>
           <h2 class="section-title font-display">Things I've<br /><em>written down.</em></h2>
         </div>
       </div>
 
       <div class="bento">
-
-        <a href="#" class="tweet tweet--feature bento__item--lg">
-          <div class="tweet__head">
-            <div class="tweet__avatar">A</div>
-            <div class="tweet__meta">
-              <div class="tweet__name">Avishek Nayak <svg class="tweet__verified" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.4 2.6 3.5-.4 1 3.4 3.1 1.7-1.5 3.2 1.5 3.2-3.1 1.7-1 3.4-3.5-.4L12 22l-2.4-2.6-3.5.4-1-3.4-3.1-1.7L3.5 11.5 2 8.3l3.1-1.7 1-3.4 3.5.4L12 2zm-1.2 13.4l5.7-5.7-1.4-1.4-4.3 4.3-2-2-1.4 1.4 3.4 3.4z"/></svg></div>
-              <div class="tweet__handle">@avisheknayak</div>
-            </div>
-          </div>
-          <p class="tweet__body">Most "dark patterns" weren't malicious to start. They were short-term metrics chasing long-term trust — and someone forgot to revisit. The fix isn't more rules. It's a designer in the room when the metric gets set.</p>
-          <div class="tweet__footer">
-            <div class="tweet__actions">
-              <span><i data-lucide="message-circle"></i> 24</span>
-              <span><i data-lucide="repeat-2"></i> 142</span>
-              <span><i data-lucide="heart"></i> 1.2k</span>
-            </div>
-            <span class="tweet__date">Mar 12</span>
-          </div>
-        </a>
 
         <a href="#" class="tweet">
           <div class="tweet__head">
@@ -1500,10 +1608,6 @@
   <!-- ============== COUNTER LIVE ============== -->
   <section id="clock" class="clock">
     <div class="container">
-      <div class="section-tag">
-        <div class="section-tag__line section-tag__line--orange"></div>
-        <span class="font-mono">The Counter · Live</span>
-      </div>
       <h2 class="section-title font-display">I've been designing for</h2>
       <p class="section-sub font-display">...since the 7th of March, 2022. The clock has not stopped.</p>
 
@@ -1532,149 +1636,12 @@
     </div>
   </section>
 
-  <!-- ============== T-SHAPED CAREER ============== -->
-  <section id="career" class="career-section">
-    <div class="container">
-      <div class="career">
-        <div class="tlayout">
-          <div class="tlayout__left">
-            <div class="career__head career__head--stacked">
-              <div class="section-tag">
-                <div class="section-tag__line section-tag__line--orange"></div>
-                <span class="font-mono">Career Trajectory · The T-Shape</span>
-              </div>
-              <h3 class="career__title">A T-shaped<br /><em>career.</em></h3>
-            </div>
-
-            <div class="chart">
-              <div class="chart__svg-wrap">
-                <svg viewBox="0 0 1000 540" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="T-shaped career trajectory: two breadth roles on the bottom, three depth roles going up">
-                  <line x1="120" y1="420" x2="880" y2="420" stroke="#1A1A1A" stroke-opacity="0.22" stroke-width="2"/>
-                  <line x1="500" y1="80"  x2="500" y2="420" stroke="#1A1A1A" stroke-opacity="0.22" stroke-width="2"/>
-
-                  <g class="tdot" data-experience-id="tutoraj" tabindex="0" role="button" aria-label="Tutoraj — Sales Executive">
-                    <circle class="tdot__halo" cx="120" cy="420" r="22"/>
-                    <circle class="tdot__hit"  cx="120" cy="420" r="32"/>
-                    <circle class="tdot__ring" cx="120" cy="420" r="11"/>
-                    <circle class="tdot__core" cx="120" cy="420" r="4"/>
-                  </g>
-                  <g pointer-events="none">
-                    <text x="120" y="466" text-anchor="middle" class="tlabel-role">SALES EXECUTIVE</text>
-                    <text x="120" y="490" text-anchor="middle" class="tlabel-company">Tutoraj</text>
-                  </g>
-
-                  <g class="tdot" data-experience-id="rwm" tabindex="0" role="button" aria-label="Red and White Multimedia — UX Subject Matter Expert">
-                    <circle class="tdot__halo" cx="880" cy="420" r="22"/>
-                    <circle class="tdot__hit"  cx="880" cy="420" r="32"/>
-                    <circle class="tdot__ring" cx="880" cy="420" r="11"/>
-                    <circle class="tdot__core" cx="880" cy="420" r="4"/>
-                  </g>
-                  <g pointer-events="none">
-                    <text x="880" y="466" text-anchor="middle" class="tlabel-role">UX SUBJECT MATTER EXPERT</text>
-                    <text x="880" y="490" text-anchor="middle" class="tlabel-company">Red &amp; White Multimedia</text>
-                  </g>
-
-                  <g class="tdot" data-experience-id="twist" tabindex="0" role="button" aria-label="Twist Open UX — Junior UX Designer">
-                    <circle class="tdot__halo" cx="500" cy="340" r="22"/>
-                    <circle class="tdot__hit"  cx="500" cy="340" r="32"/>
-                    <circle class="tdot__ring" cx="500" cy="340" r="11"/>
-                    <circle class="tdot__core" cx="500" cy="340" r="4"/>
-                  </g>
-                  <g pointer-events="none">
-                    <text x="528" y="336" text-anchor="start" class="tlabel-role">JUNIOR UX DESIGNER</text>
-                    <text x="528" y="358" text-anchor="start" class="tlabel-company">Twist Open UX</text>
-                  </g>
-
-                  <g class="tdot" data-experience-id="7span" tabindex="0" role="button" aria-label="7Span — Senior UX Designer">
-                    <circle class="tdot__halo" cx="500" cy="220" r="22"/>
-                    <circle class="tdot__hit"  cx="500" cy="220" r="32"/>
-                    <circle class="tdot__ring" cx="500" cy="220" r="11"/>
-                    <circle class="tdot__core" cx="500" cy="220" r="4"/>
-                  </g>
-                  <g pointer-events="none">
-                    <text x="528" y="216" text-anchor="start" class="tlabel-role">SENIOR UX DESIGNER</text>
-                    <text x="528" y="238" text-anchor="start" class="tlabel-company">7Span</text>
-                  </g>
-
-                  <g class="tdot" data-experience-id="open" tabindex="0" role="button" aria-label="Open for Product Designer roles">
-                    <circle class="tdot__halo" cx="500" cy="100" r="22"/>
-                    <circle class="tdot__hit"  cx="500" cy="100" r="32"/>
-                    <circle class="tdot__ring" cx="500" cy="100" r="11"/>
-                    <circle class="tdot__core" cx="500" cy="100" r="4"/>
-                  </g>
-                  <g pointer-events="none">
-                    <text x="528" y="96"  text-anchor="start" class="tlabel-role">OPEN FOR WORK</text>
-                    <text x="528" y="118" text-anchor="start" class="tlabel-company">Product Designer roles</text>
-                  </g>
-                </svg>
-              </div>
-
-              <div class="tlist">
-                <button class="tlist__item tlist__item--horizontal" data-experience-id="tutoraj">
-                  <div class="tlist__marker"></div>
-                  <div>
-                    <div class="tlist__role">Sales Executive · breadth</div>
-                    <div class="tlist__company">Tutoraj</div>
-                  </div>
-                </button>
-                <button class="tlist__item" data-experience-id="twist">
-                  <div class="tlist__marker"></div>
-                  <div>
-                    <div class="tlist__role">Junior UX Designer · depth</div>
-                    <div class="tlist__company">Twist Open UX</div>
-                  </div>
-                </button>
-                <button class="tlist__item tlist__item--horizontal" data-experience-id="rwm">
-                  <div class="tlist__marker"></div>
-                  <div>
-                    <div class="tlist__role">UX SME · breadth</div>
-                    <div class="tlist__company">Red &amp; White Multimedia</div>
-                  </div>
-                </button>
-                <button class="tlist__item" data-experience-id="7span">
-                  <div class="tlist__marker"></div>
-                  <div>
-                    <div class="tlist__role">Senior UX Designer · depth</div>
-                    <div class="tlist__company">7Span</div>
-                  </div>
-                </button>
-                <button class="tlist__item" data-experience-id="open">
-                  <div class="tlist__marker"></div>
-                  <div>
-                    <div class="tlist__role">Open for work · depth</div>
-                    <div class="tlist__company">Product Designer roles</div>
-                  </div>
-                </button>
-              </div>
-
-              <p class="chart__hint">Hover or tap a dot to read each chapter ↓</p>
-            </div>
-          </div><!-- /.tlayout__left -->
-
-          <article class="tcard" id="tcard" aria-live="polite">
-            <div class="tcard__inner">
-              <div class="tcard__index">01 / 05</div>
-              <div class="tcard__role">Sales Executive</div>
-              <h4 class="tcard__company">Tutoraj</h4>
-              <p class="tcard__desc"></p>
-            </div>
-          </article>
-        </div><!-- /.tlayout -->
-      </div>
-    </div>
-  </section>
-
   <!-- ============== ABOUT ============== -->
   <section id="about" class="about">
     <div class="about__blob about__blob--1"></div>
     <div class="about__blob about__blob--2"></div>
 
     <div class="container">
-      <div class="section-tag">
-        <div class="section-tag__line section-tag__line--ink"></div>
-        <span class="font-mono">Beyond the pixels</span>
-      </div>
-
       <h2 class="section-title font-display">When I close<br />the laptop,</h2>
 
       <div class="about__grid">
@@ -1683,17 +1650,17 @@
           <div class="about__icon spin-slow"><i data-lucide="bike"></i></div>
           <div class="about__num font-mono">01 · Endurance</div>
           <h3 class="about__title font-display">Cycling &amp;<br /><em class="accent-orange">triathlon training.</em></h3>
-          <p class="about__body">I'm building toward Ironman Goa 2027 — 3.8 km swim, 180 km bike, 42.2 km run. Most days start before sunrise with a ride, intervals, or a long run. The same principles apply to design: small daily reps, brutal honesty about your splits, and respect for the long game over flashy PRs.</p>
+          <p class="about__body">I'm building toward Ironman Goa 2027. Most days start before sunrise with a ride, intervals, or a long run. The same principles apply to design: small daily reps, brutal honesty about your splits, and respect for the long game over flashy PRs.</p>
 
           <div class="about__stats">
-            <div><div class="about__stat-num font-display" style="color:#FFD66B">2027</div><div class="about__stat-label font-mono">Ironman target</div></div>
-            <div><div class="about__stat-num font-display" style="color:#7CB07A">5AM</div><div class="about__stat-label font-mono">Most rides start</div></div>
-            <div><div class="about__stat-num font-display" style="color:#FF5B2E">180k</div><div class="about__stat-label font-mono">Bike leg goal (km)</div></div>
+            <div><div class="about__stat-num font-display" style="color:#FFD66B">1.9</div><div class="about__stat-label font-mono">km swim</div></div>
+            <div><div class="about__stat-num font-display" style="color:#7CB07A">21</div><div class="about__stat-label font-mono">km run</div></div>
+            <div><div class="about__stat-num font-display" style="color:#FF5B2E">90</div><div class="about__stat-label font-mono">km cycling</div></div>
           </div>
         </div>
 
-        <!-- Photography card -->
-        <div class="about__card about__card--light float-2">
+        <!-- Photography card — HIDDEN: remove style="display:none" below to unhide -->
+        <div class="about__card about__card--light float-2" style="display: none;">
           <div class="about__icon"><i data-lucide="camera" style="color:#2D5BFF"></i></div>
           <div class="about__num about__num--ink font-mono">02 · Frames</div>
           <h3 class="about__title about__title--ink font-display">Photography &amp;<br /><em style="color:#2D5BFF">slow looking.</em></h3>
@@ -1723,11 +1690,6 @@
   <!-- ============== FOOTER (now light) ============== -->
   <footer id="contact" class="footer">
     <div class="container">
-      <div class="section-tag">
-        <div class="section-tag__line section-tag__line--orange"></div>
-        <span class="font-mono">Get in touch · Open for work</span>
-      </div>
-
       <h2 class="footer__title font-display">Let's build<br />something users<br /><em class="accent-orange">actually love.</em></h2>
 
       <div class="footer__contact">
@@ -1752,6 +1714,13 @@
             <div class="footer__contact-value font-display">Bengaluru, KA</div>
           </div>
         </div>
+        <a href="https://www.linkedin.com/in/avisheknayak/" target="_blank" rel="noopener" class="footer__contact-item">
+          <div class="footer__contact-icon"><i data-lucide="linkedin"></i></div>
+          <div>
+            <div class="footer__contact-label font-mono">Connect with me</div>
+            <div class="footer__contact-value font-display">Avishek Nayak</div>
+          </div>
+        </a>
       </div>
 
       <div class="footer__cta">
@@ -1767,12 +1736,6 @@
 
       <div class="footer__bottom">
         <div class="font-mono footer__copy">© <span id="year">2026</span> Avishek Nayak — Designed with restraint, built with care.</div>
-        <div class="footer__social">
-          <a href="https://linkedin.com/in/avisheknayak" target="_blank" rel="noopener" aria-label="LinkedIn"><i data-lucide="linkedin"></i></a>
-          <a href="https://instagram.com/avisheknayak.13" target="_blank" rel="noopener" aria-label="Instagram"><i data-lucide="instagram"></i></a>
-          <a href="mailto:workdesk.avishek@gmail.com" aria-label="Email"><i data-lucide="mails"></i></a>
-          <a href="https://wa.me/919925403798" target="_blank" rel="noopener" aria-label="WhatsApp"><i data-lucide="phone"></i></a>
-        </div>
       </div>
     </div>
   </footer>
@@ -1790,11 +1753,11 @@
         "Storyteller", "Triathlete-in-training", "Coffee-driven"
       ],
       projects: [
-        { n: "01", tag: "Enterprise · Simulation",   title: "Designing a Motor Simulation Tool for Complex Engineering Workflows", bg: "#FF5B2E", accent: "#FBF7EE", tilt: -2,   href: "#" },
-        { n: "02", tag: "Sports · Performance Data", title: "Increasing Athlete Performance Through Football Data Research",       bg: "#1A1A1A", accent: "#FFD66B", tilt:  1.5, href: "#" },
-        { n: "03", tag: "SaaS · Retention",          title: "Improving User Retention for a Dubai-Based Ticketing Platform",       bg: "#7CB07A", accent: "#FBF7EE", tilt: -1,   href: "#" },
-        { n: "04", tag: "Healthcare · Workflow",     title: "Reducing Drug Trial Timelines from Months to Weeks",                  bg: "#FFD66B", accent: "#1A1A1A", tilt:  2,   href: "#" },
-        { n: "05", tag: "AI · Healthcare Upsell",    title: "Up-selling Nutrition Products through an AI Healthcare Agent",        bg: "#2D5BFF", accent: "#FBF7EE", tilt: -1.5, href: "#" }
+        { n: "01", tag: "Enterprise · Simulation",   title: "Designing a Motor Simulation Tool for Complex Engineering Workflows", bg: "#FF5B2E", accent: "#FBF7EE", tilt: -2,   href: "#", image: "" },
+        { n: "02", tag: "Sports · Performance Data", title: "Increasing Athlete Performance Through Football Data Research",       bg: "#1A1A1A", accent: "#FFD66B", tilt:  1.5, href: "#", image: "" },
+        { n: "03", tag: "SaaS · Retention",          title: "Improving User Retention for a Dubai-Based Ticketing Platform",       bg: "#7CB07A", accent: "#FBF7EE", tilt: -1,   href: "#", image: "" },
+        { n: "04", tag: "Healthcare · Workflow",     title: "Reducing Drug Trial Timelines from Months to Weeks",                  bg: "#FFD66B", accent: "#1A1A1A", tilt:  2,   href: "#", image: "" },
+        { n: "05", tag: "AI · Healthcare Upsell",    title: "Up-selling Nutrition Products through an AI Healthcare Agent",        bg: "#2D5BFF", accent: "#FBF7EE", tilt: -1.5, href: "#", image: "" }
       ]
     };
 
@@ -1849,8 +1812,10 @@
       grid.innerHTML = DATA.projects.map(p => {
         const href = p.href || '#';
         const caseLabel = href === '#' ? 'Case study soon' : 'Read case study';
+        const hasImg = !!p.image;
         return `
-        <a href="${href}" class="project" style="background:${p.bg}; color:${p.accent}; transform:rotate(${p.tilt}deg);">
+        <a href="${href}" class="project ${hasImg ? 'project--hasimg' : ''}" style="background:${p.bg}; color:${p.accent}; transform:rotate(${p.tilt}deg);">
+          ${hasImg ? `<img class="project__cover" src="${p.image}" alt="" />` : ''}
           <div class="project__big-num" style="color:${p.accent}">${p.n}</div>
           <div class="project__inner">
             <div class="project__top">
@@ -1879,30 +1844,35 @@
         id: 'tutoraj',
         company: 'Tutoraj',
         role: 'Sales Executive',
-        description: "Started my career as a sales executive — implementing the sales funnel, pitching the product's long-term value to potential users, and creating pitch decks that improved the sales cycle. The first lesson in why people actually buy. (Dec 2021 – Mar 2022)"
+        period: 'Dec 2021 – Mar 2022',
+        description: "Started my career as a sales executive — implementing the sales funnel, pitching the product's long-term value to potential users, and creating pitch decks that improved the sales cycle. The first lesson in why people actually buy."
       },
       {
         id: 'twist',
         company: 'Twist Open UX',
         role: 'Junior UX Designer',
-        description: "My first proper UX role. Worked on 2 projects and a UX research collaboration with Google Research Labs. Also got the chance to showcase the work to the Osaka Design team of the Japanese Government — early proof that good thinking travels. (Mar 2022 – Mar 2024)"
+        period: 'Mar 2022 – Mar 2024',
+        description: "My first proper UX role. Worked on 2 projects and a UX research collaboration with Google Research Labs. Also got the chance to showcase the work to the Osaka Design team of the Japanese Government — early proof that good thinking travels."
       },
       {
         id: 'rwm',
         company: 'Red & White Multimedia Institute',
         role: 'UX Subject Matter Expert',
-        description: "After 2 years in a leading design studio, I spent 9 months in Rajkot, Gujarat — sharing my design experiences and learnings with students to help them get placed at design studios and MNCs. Teaching, it turned out, was the fastest way to learn. (Apr 2024 – Oct 2024)"
+        period: 'Apr 2024 – Oct 2024',
+        description: "After 2 years in a leading design studio, I spent 9 months in Rajkot, Gujarat — sharing my design experiences and learnings with students to help them get placed at design studios and MNCs. Teaching, it turned out, was the fastest way to learn."
       },
       {
         id: '7span',
         company: '7Span',
         role: 'Senior UX Designer',
-        description: "The urge to keep learning brought me back to the corporate world. I joined 7Span — the largest service agency in Ahmedabad — as a designer, and was soon promoted to a Senior Design role leading a team of 3 junior designers. (Feb 2025 – Present)"
+        period: 'Feb 2025 – Present',
+        description: "The urge to keep learning brought me back to the corporate world. I joined 7Span — the largest service agency in Ahmedabad — as a designer, and was soon promoted to a Senior Design role leading a team of 3 junior designers."
       },
       {
         id: 'open',
         company: 'Looking for Product Designer Opportunities',
         role: 'Open for Work',
+        period: 'Now',
         description: "Now looking for Product Design roles where I can go deep on the product life cycle — improving features based on drop-off rates, understanding adoption time, why happy flows still create friction, working through edge cases, conversion and churn rates, and balancing data-driven decisions with the emotional aspect of brand and product."
       }
     ];
@@ -1924,11 +1894,9 @@
       const card = $('#tcard');
       card.classList.add('is-swapping');
       setTimeout(() => {
-        const idx = EXPERIENCES.indexOf(exp) + 1;
-        card.querySelector('.tcard__index').textContent =
-          `${pad(idx)} / ${pad(EXPERIENCES.length)}`;
-        card.querySelector('.tcard__role').textContent    = exp.role;
         card.querySelector('.tcard__company').textContent = exp.company;
+        card.querySelector('.tcard__role').textContent    = exp.role;
+        card.querySelector('.tcard__period').textContent  = exp.period ? `(${exp.period})` : '';
         card.querySelector('.tcard__desc').textContent    = exp.description;
         card.classList.remove('is-swapping');
       }, 200);
@@ -1963,6 +1931,48 @@
       window.addEventListener('resize', update);
       // Sync animation with current second of real time
       path.style.animationDelay = `-${new Date().getSeconds()}s`;
+    }
+
+    /* ---------- Scroll reveal ---------- */
+    function setupScrollReveals() {
+      const selectors = [
+        '.skills-col',
+        '.clock h2', '.clock .section-sub', '.timer', '.clock__caption',
+        '.career-section h3', '.career-section .chart', '.career-section .tcard',
+        '.work h2', '.project',
+        '.articles h2', '.tweet',
+        '.about h2', '.about__card', '.about__quote',
+        '.footer__title', '.footer__contact-item', '.footer__cta', '.footer__bottom'
+      ];
+      const targets = document.querySelectorAll(selectors.join(','));
+      targets.forEach(el => el.classList.add('reveal'));
+
+      // Stagger siblings inside grouped containers
+      const groupSelectors = ['.skills-strip__grid', '.projects', '.bento', '.about__grid', '.footer__contact'];
+      groupSelectors.forEach(sel => {
+        document.querySelectorAll(sel).forEach(group => {
+          Array.from(group.children).forEach((child, i) => {
+            if (child.classList.contains('reveal')) {
+              child.style.transitionDelay = (i * 0.08) + 's';
+            }
+          });
+        });
+      });
+
+      if (!('IntersectionObserver' in window)) {
+        targets.forEach(el => el.classList.add('is-visible'));
+        return;
+      }
+      const obs = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+            obs.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+      targets.forEach(el => obs.observe(el));
     }
 
     /* ---------- Typewriter (hero title) ---------- */
@@ -2009,14 +2019,15 @@
     /* ---------- Init ---------- */
     function init() {
       $('#year').textContent = new Date().getFullYear();
+      // Timer first — runs even if later setup throws
+      updateClock();
+      setInterval(updateClock, 1000);
       buildMarquee();
       renderProjects();
-      setupTChart();
       setupTimerBorder();
-      updateClock();
+      setupScrollReveals();
       const heroTitle = document.getElementById('heroTitle');
       if (heroTitle) typewriter(heroTitle, 55);
-      setInterval(updateClock, 1000);
 
       // All Lucide icons get stroke-width 1.5 as requested
       if (window.lucide) {
