@@ -9,7 +9,7 @@
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Gochi+Hand&family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,400..900,0..100,0..1;1,9..144,400..900,0..100,0..1&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Nosifer&family=Gochi+Hand&family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,400..900,0..100,0..1;1,9..144,400..900,0..100,0..1&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet" />
 
   <!-- Lucide icons -->
   <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
@@ -235,9 +235,11 @@
       gap: 16px;
     }
     .nav__logo {
-      font-size: 24px;
-      font-weight: 900;
-      letter-spacing: -0.04em;
+      font-family: 'Nosifer', cursive;
+      font-size: 20px;
+      font-weight: 400;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
     }
     .nav__links {
       display: none;
@@ -1103,8 +1105,9 @@
       position: absolute;
       bottom: -50px;
       right: -24px;
-      font-family: var(--font-display);
+      font-family: 'Fraunces', serif !important;
       font-weight: 900;
+      font-style: italic;
       font-size: 14rem;
       line-height: 1;
       opacity: 0.18;
@@ -1497,13 +1500,6 @@
       </div>
 
       <div class="projects" id="projectsGrid"></div>
-
-      <div class="work__footer">
-        <div class="clock__pill clock__pill--inverted">
-          <i data-lucide="coffee"></i>
-          <span class="font-mono">View whole menu</span>
-        </div>
-      </div>
     </div>
   </section>
 
@@ -1811,7 +1807,6 @@
       const grid = $('#projectsGrid');
       grid.innerHTML = DATA.projects.map(p => {
         const href = p.href || '#';
-        const caseLabel = href === '#' ? 'Case study soon' : 'Read case study';
         const hasImg = !!p.image;
         return `
         <a href="${href}" class="project ${hasImg ? 'project--hasimg' : ''}" style="background:${p.bg}; color:${p.accent}; transform:rotate(${p.tilt}deg);">
@@ -1827,10 +1822,6 @@
             <div>
               <div class="project__caseline">// case ${p.n}</div>
               <h3 class="project__title">${p.title}</h3>
-              <div class="project__meta">
-                <span class="project__meta-line" style="background:${p.accent}"></span>
-                <span>${caseLabel}</span>
-              </div>
             </div>
           </div>
         </a>
