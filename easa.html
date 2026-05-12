@@ -34,11 +34,11 @@ body {
 }
 
 /* TYPOGRAPHY */
-h1 { font-family: 'Afacad', sans-serif; font-size: clamp(36px, 6vw, 72px); font-weight: 700; letter-spacing: -0.02em; }
+h1 { font-family: 'Afacad', sans-serif; font-size: clamp(28px, 4.5vw, 56px); font-weight: 700; letter-spacing: -0.02em; line-height: 1.1; }
 h2, h3, h4 { font-family: 'Bricolage Grotesque', sans-serif; line-height: 1.15; }
 h2 { font-size: clamp(24px, 3.5vw, 38px); font-weight: 700; letter-spacing: -0.02em; }
 h3 { font-size: clamp(16px, 2vw, 20px); font-weight: 600; letter-spacing: -0.01em; }
-h4 { font-size: 13px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--mid); }
+h4 { font-size: 24px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--mid); }
 
 p { color: #3A3832; font-weight: 300; font-size: 16px; line-height: 1.8; }
 
@@ -142,7 +142,7 @@ p { color: #3A3832; font-weight: 300; font-size: 16px; line-height: 1.8; }
 .section-header { margin-bottom: 56px; }
 .section-header h4 { margin-bottom: 12px; }
 .section-header h2 { margin-bottom: 16px; }
-.section-header p { max-width: 560px; }
+.section-header p { max-width: 100%; }
 
 /* NUMBERED SECTION LABEL */
 .num-label {
@@ -522,6 +522,35 @@ p { color: #3A3832; font-weight: 300; font-size: 16px; line-height: 1.8; }
   .section { padding: 64px 0; }
 }
 
+
+/* DISCOVERY TABS */
+.disc-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 32px;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 0;
+}
+.disc-tab {
+  font-family: 'Bricolage Grotesque', sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  padding: 10px 18px;
+  border: none;
+  background: transparent;
+  color: var(--mid);
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+  margin-bottom: -1px;
+  transition: all .15s;
+  border-radius: 0;
+}
+.disc-tab:hover { color: var(--black); }
+.disc-tab.active { color: var(--accent); border-bottom-color: var(--accent); font-weight: 600; }
+.disc-panel { display: none; padding-top: 8px; }
+.disc-panel.active { display: block; }
+
 /* PRINT-FRIENDLY */
 @media print { .case-nav { display: none; } }
 </style>
@@ -537,15 +566,14 @@ p { color: #3A3832; font-weight: 300; font-size: 16px; line-height: 1.8; }
       <span>·</span>
       <span>13 months</span>
     </div>
-    <h1>Designing for Complexity —<br>50 Years of Data,<br>Zero Compromises</h1>
-    <p class="hero-sub">Redesigning EASA's electrical motor simulation tool from a Windows-only desktop application to a fully responsive web platform — without stripping the depth that expert engineers depend on.</p>
+    <h1>Designing a Motor Simulation Tool for Complex Engineering Workflows</h1>
     <div class="tags" style="margin-bottom: 48px;">
-      <span class="tag">UX Design</span>
-      <span class="tag">SaaS</span>
-      <span class="tag">Design System</span>
-      <span class="tag">Information Architecture</span>
-      <span class="tag">Accessibility</span>
-      <span class="tag">Industrial Tech</span>
+      <span class="tag" style="border-color:#005693;color:#7BB8E0;background:rgba(0,86,147,0.2);">UX Design</span>
+      <span class="tag" style="border-color:#1A8A6C;color:#5EC9A8;background:rgba(26,138,108,0.2);">SaaS</span>
+      <span class="tag" style="border-color:#8A5A1A;color:#D4A05A;background:rgba(138,90,26,0.2);">Design System</span>
+      <span class="tag" style="border-color:#6A1A8A;color:#C08AE0;background:rgba(106,26,138,0.2);">Information Architecture</span>
+      <span class="tag" style="border-color:#8A1A2A;color:#D47A8A;background:rgba(138,26,42,0.2);">Accessibility</span>
+      <span class="tag" style="border-color:#2A5A1A;color:#7AB85A;background:rgba(42,90,26,0.2);">Industrial Tech</span>
     </div>
     <div class="hero-meta">
       <div class="hero-meta-item">
@@ -576,12 +604,14 @@ p { color: #3A3832; font-weight: 300; font-size: 16px; line-height: 1.8; }
       <div class="line"></div>
     </div>
     <div class="section-header">
-      <h4>The Problem</h4>
-      <h2>A tool built for experts that only experts could survive</h2>
-      <p>EASA is a global authority in the electrical motor repair and maintenance industry. Their desktop simulation tool held over 50 years of motor data — indispensable to the engineers who knew it.</p>
+      <h4>Problem Statement</h4>
+      <p>EASA is a global authority in the electrical motor database industry. Its flagship calculation tool, currently on version V4, is available only as a native Windows application, which limits accessibility and prevents new engineers from trying the product before purchase.</p>
+      <p style="margin-top:16px;">Beyond access, the tool carries a steep learning curve. Every new engineer requires three months of intensive, mandatory training delivered by Eugene Vogel, a technical EASA engineer whose role is to onboard users into the software. This dependency creates a bottleneck for adoption and slows time-to-productivity for new hires.</p>
+      <p style="margin-top:16px;">The CEO's vision is twofold: make the tool easier to access across platforms, and grow the user base so younger engineers can experience the product earlier in their careers and convert into paying users over time.</p>
+      <p style="margin-top:16px;">The redesign operates under one critical constraint. The existing user base is predominantly in the 50+ age group, and these power users will remain the core revenue drivers for the next several years until the share of younger engineers grows. As a result, the redesign must retain complete functional parity with V4, preserving the workflows, logic, and depth that long-time users rely on, while modernizing the experience for newcomers.</p>
     </div>
 
-    <div class="card-grid">
+    <div class="card-grid" style="grid-template-columns: 1fr 1fr 1fr;">
       <div class="card card-alt">
         <div class="card-num">01</div>
         <h3>Windows-only</h3>
@@ -590,17 +620,12 @@ p { color: #3A3832; font-weight: 300; font-size: 16px; line-height: 1.8; }
       <div class="card card-alt">
         <div class="card-num">02</div>
         <h3>3-month training requirement</h3>
-        <p>Every new user required a dedicated trainer for three full months before independent use. The complexity of the tool had been placed entirely on the user.</p>
+        <p>Every new engineer requires mandatory training delivered by Eugene Vogel — a single point of failure that bottlenecks adoption and slows time-to-productivity.</p>
       </div>
       <div class="card card-alt">
         <div class="card-num">03</div>
-        <h3>Redundant actions</h3>
-        <p>Duplicate and Clone motor performed identical functions. Multiple buttons triggered the same process. The interface had accumulated feature debt across years of additions.</p>
-      </div>
-      <div class="card card-alt">
-        <div class="card-num">04</div>
-        <h3>Nested tab overload</h3>
-        <p>Tabs within tabs within tabs. The desktop app allowed these to be pinned — a Windows-specific behavior with no direct browser equivalent.</p>
+        <h3>Age group 50+</h3>
+        <p>The power users who drive core revenue can use V4 in their sleep. The redesign must maintain complete functional parity — same workflows, same logic, same depth.</p>
       </div>
     </div>
 
@@ -620,84 +645,125 @@ p { color: #3A3832; font-weight: 300; font-size: 16px; line-height: 1.8; }
       <span class="num">02</span>
       <div class="line" style="background: #C8C4BC;"></div>
     </div>
-    <div class="section-header">
-      <h4>Discovery Phase</h4>
-      <h2>24 hours of business understanding before touching a canvas</h2>
-      <p>Structured sessions across a month to get a full overview of the product, business model, user base, and key stakeholders. Every session documented as minutes of meeting — so every design decision could be traced back to observed behavior.</p>
+    <h4 style="margin-bottom: 16px;">Discovery Phase</h4>
+    <p style="margin-bottom: 40px; max-width: 640px;">In the discovery phase we did product understanding, connected with potential user groups, and gathered key insights to get a starting point for the design.</p>
+
+    <!-- TAB BAR -->
+    <div class="disc-tabs">
+      <button class="disc-tab active" onclick="showTab('product-understanding', this)">Product Understanding</button>
+      <button class="disc-tab" onclick="showTab('methodology', this)">Methodology Type</button>
+      <button class="disc-tab" onclick="showTab('synthesis', this)">Synthesis</button>
+      <button class="disc-tab" onclick="showTab('insights', this)">Key Insights & Opportunities</button>
+      <button class="disc-tab" onclick="showTab('impact', this)">Impact</button>
+      <button class="disc-tab" onclick="showTab('stakeholders', this)">Stakeholders</button>
     </div>
 
-    <div class="placeholder"><p>[ Insert: Discovery session video — key questionnaire and 5 KPI findings ]</p></div>
-
-    <h3 style="margin-bottom: 20px;">Stakeholders & System</h3>
-    <div style="overflow-x: auto; margin-bottom: 40px;">
-    <table class="cs-table">
-      <thead>
-        <tr>
-          <th>Stakeholder</th>
-          <th>Role in System</th>
-          <th>Design Relevance</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td><strong>Eugene</strong></td>
-          <td>Team Lead — domain expert and primary research proxy</td>
-          <td>Primary contextual inquiry participant. His workflows defined the IA.</td>
-        </tr>
-        <tr>
-          <td><strong>Timothy</strong></td>
-          <td>EASA Product Creator — database management and integrity</td>
-          <td>Defined data structure constraints and filter logic requirements.</td>
-        </tr>
-        <tr>
-          <td><strong>EASA Company</strong></td>
-          <td>Operator — motor simulation platform owner</td>
-          <td>Business goals, subscription model direction, and sign-off authority.</td>
-        </tr>
-      </tbody>
-    </table>
+    <!-- TAB: Product Understanding -->
+    <div class="disc-panel active" id="tab-product-understanding">
+      <p style="margin-bottom: 24px;">In this phase our main objective is doing research, finding core problems and questionnaire creation to ask in the interviews later.</p>
+      <div class="placeholder"><p>[ Insert: Discovery session video — key questionnaire and 5 KPI findings ]</p></div>
     </div>
 
-    <h3 style="margin-bottom: 24px;">5 Key Findings</h3>
-    <div>
-      <div class="finding">
-        <div class="finding-num">01</div>
-        <div>
-          <h3>Redundant actions bred confusion</h3>
-          <p>Duplicate and Clone performed identical functions. Years of additions without a design system created a UI that had no internal logic — only institutional memory.</p>
+    <!-- TAB: Methodology Type -->
+    <div class="disc-panel" id="tab-methodology">
+      <p style="margin-bottom: 24px;">Daily interviews with Eugene — Technical Engineer, and Timothy Vogel — Java Developer and creator of the EASA product.</p>
+      <div class="card-grid">
+        <div class="card card-alt">
+          <div class="card-num">Participant 01</div>
+          <h3>Eugene</h3>
+          <p>Technical Engineer and domain expert. Primary contextual inquiry participant — his daily workflows defined the information architecture and user flow logic.</p>
         </div>
-      </div>
-      <div class="finding">
-        <div class="finding-num">02</div>
-        <div>
-          <h3>Training was a symptom, not a solution</h3>
-          <p>The 3-month onboarding wasn't a knowledge gap — it was an interface gap. The complexity of the tool had been transferred entirely to the user. Tesler's Law in plain sight.</p>
-        </div>
-      </div>
-      <div class="finding">
-        <div class="finding-num">03</div>
-        <div>
-          <h3>Tab nesting had no web equivalent</h3>
-          <p>The desktop app's pinnable nested tabs were a Windows-specific convention. Replicating them in a browser viewport was technically and experientially impossible.</p>
-        </div>
-      </div>
-      <div class="finding">
-        <div class="finding-num">04</div>
-        <div>
-          <h3>Role-based UI had no visual language</h3>
-          <p>Features were enabled or disabled by role — normal users, engineers, senior engineers — with no clear visual cues distinguishing what was accessible, locked, or irrelevant.</p>
-        </div>
-      </div>
-      <div class="finding">
-        <div class="finding-num">05</div>
-        <div>
-          <h3>50 years of data, no entry point for new users</h3>
-          <p>The motor database was internally coherent — but completely opaque to anyone without training. The data structure made sense only after the onboarding that preceded it.</p>
+        <div class="card card-alt">
+          <div class="card-num">Participant 02</div>
+          <h3>Timothy Vogel</h3>
+          <p>Java Developer and EASA product creator. Defined data structure constraints, filter logic requirements, and the technical boundaries of what was and wasn't feasible.</p>
         </div>
       </div>
     </div>
 
-    <div class="placeholder"><p>[ Insert: Existing IA and Site Map — desktop application ]</p></div>
+    <!-- TAB: Synthesis -->
+    <div class="disc-panel" id="tab-synthesis">
+      <div class="placeholder"><p>[ Insert: Synthesis artifacts — affinity maps, empathy maps, journey maps ]</p></div>
+    </div>
+
+    <!-- TAB: Key Insights & Opportunities -->
+    <div class="disc-panel" id="tab-insights">
+      <div>
+        <div class="finding">
+          <div class="finding-num">01</div>
+          <div>
+            <h3>Redundant actions bred confusion</h3>
+            <p>Duplicate and Clone performed identical functions. Years of additions without a design system created a UI that had no internal logic — only institutional memory.</p>
+          </div>
+        </div>
+        <div class="finding">
+          <div class="finding-num">02</div>
+          <div>
+            <h3>Training was a symptom, not a solution</h3>
+            <p>The 3-month onboarding wasn't a knowledge gap — it was an interface gap. The complexity of the tool had been transferred entirely to the user. Tesler's Law in plain sight.</p>
+          </div>
+        </div>
+        <div class="finding">
+          <div class="finding-num">03</div>
+          <div>
+            <h3>Tab nesting had no web equivalent</h3>
+            <p>The desktop app's pinnable nested tabs were a Windows-specific convention. Replicating them in a browser viewport was technically and experientially impossible.</p>
+          </div>
+        </div>
+        <div class="finding">
+          <div class="finding-num">04</div>
+          <div>
+            <h3>Role-based UI had no visual language</h3>
+            <p>Features were enabled or disabled by role — normal users, engineers, senior engineers — with no clear visual cues distinguishing what was accessible, locked, or irrelevant.</p>
+          </div>
+        </div>
+        <div class="finding">
+          <div class="finding-num">05</div>
+          <div>
+            <h3>50 years of data, no entry point for new users</h3>
+            <p>The motor database was internally coherent — but completely opaque to anyone without training. The data structure made sense only after the onboarding that preceded it.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB: Impact -->
+    <div class="disc-panel" id="tab-impact">
+      <div class="placeholder"><p>[ Insert: Impact metrics and outcome data ]</p></div>
+    </div>
+
+    <!-- TAB: Stakeholders -->
+    <div class="disc-panel" id="tab-stakeholders">
+      <div style="overflow-x: auto;">
+      <table class="cs-table">
+        <thead>
+          <tr>
+            <th>Stakeholder</th>
+            <th>Role in System</th>
+            <th>Design Relevance</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Eugene</strong></td>
+            <td>Team Lead — domain expert and primary research proxy</td>
+            <td>Primary contextual inquiry participant. His workflows defined the IA.</td>
+          </tr>
+          <tr>
+            <td><strong>Timothy Vogel</strong></td>
+            <td>Java Developer — EASA product creator, database management</td>
+            <td>Defined data structure constraints and filter logic requirements.</td>
+          </tr>
+          <tr>
+            <td><strong>EASA Company</strong></td>
+            <td>Operator — motor simulation platform owner</td>
+            <td>Business goals, subscription model direction, and sign-off authority.</td>
+          </tr>
+        </tbody>
+      </table>
+      </div>
+    </div>
+
   </div>
 </section>
 
@@ -1052,6 +1118,16 @@ p { color: #3A3832; font-weight: 300; font-size: 16px; line-height: 1.8; }
     <p style="margin-top: 24px; max-width: 640px;">The one thing I would design differently: the tab management structure. The conditional bottom tab works — but it requires the user to understand its conditionality. A split-screen model, where generating output divides the screen equally between input and result, would have made that relationship spatially obvious from the first use. That is the growth this project produced.</p>
   </div>
 </section>
+
+
+<script>
+function showTab(id, btn) {
+  document.querySelectorAll('.disc-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.disc-tab').forEach(b => b.classList.remove('active'));
+  document.getElementById('tab-' + id).classList.add('active');
+  btn.classList.add('active');
+}
+</script>
 
 </body>
 </html>
